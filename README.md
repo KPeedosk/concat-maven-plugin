@@ -95,3 +95,9 @@ Project uses semantic versioning.
 ### 1.1.0 ###
 
 * Add ability to concat by a directory.
+
+### 1.1.1 ###
+
+* Set Commons IO to 2.5.
+  * UTF-8 is used to write and read files.
+* Use Toolchain to build against Java 6.
