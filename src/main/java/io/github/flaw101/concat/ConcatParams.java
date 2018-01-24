@@ -29,9 +29,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import io.github.flaw101.concat.service.ConcantenationType;
+
 /**
  * Paramerters required for building the output file and validation.
- * 
+ *
  * @author Darren Forsythe
  * @since 1.1.0
  *
@@ -45,8 +47,8 @@ public class ConcatParams {
 	private final Collection<File> files = new ArrayList<File>();
 	private final ConcantenationType concatenationType;
 
-	public ConcatParams(String directory, List<File> files, File outputFile, boolean deleteTargetFile,
-			boolean appendNewline, ConcantenationType concatentationType) {
+	public ConcatParams(final String directory, final List<File> files, final File outputFile,
+			final boolean deleteTargetFile, final boolean appendNewline, final ConcantenationType concatentationType) {
 		this.directory = directory;
 		if (files != null) {
 			this.files.addAll(files);
@@ -77,7 +79,7 @@ public class ConcatParams {
 		return Collections.unmodifiableCollection(files);
 	}
 
-	public void addAll(Collection<File> files) {
+	public void addAll(final Collection<File> files) {
 		this.files.addAll(files);
 	}
 

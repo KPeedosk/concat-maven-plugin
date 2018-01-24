@@ -21,10 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat;
+package io.github.flaw101.concat.filewriter;
 
-public enum ConcantenationType {
+/**
+ * If there is any failure writing to the output.
+ *
+ * @author Darren Forsythe
+ * @since 1.1.0
+ *
+ */
+public class CannotWriteToOutputFileException extends RuntimeException {
 
-	FILE_LIST, DIRECTORY;
+	private static final long serialVersionUID = 75580154302458082L;
 
+	public CannotWriteToOutputFileException(final Throwable throwable) {
+		super(throwable);
+	}
 }

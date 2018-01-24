@@ -21,41 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.validate;
+package io.github.flaw101.concat;
 
-import java.io.File;
+import com.google.inject.AbstractModule;
+import com.google.inject.name.Names;
 
-import org.codehaus.plexus.util.StringUtils;
-
-import io.github.flaw101.concat.ConcatParams;
+import io.github.flaw101.concat.filewriter.setup.DirectorySetup;
+import io.github.flaw101.concat.filewriter.setup.OutputSetup;
+import io.github.flaw101.concat.validate.DirectoryValidator;
+import io.github.flaw101.concat.validate.FileListValidator;
+import io.github.flaw101.concat.validate.Validator;
 
 /**
- * Validates required params for File List Type.
+ * Guice Module to setup non-concrete classes.
  *
  * @author Darren Forsythe
- * @since 1.1.0
+ * @since 1.1.2
  *
  */
-public class DirectoryValidator implements Validator {
+public class ConcatModule extends AbstractModule {
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat
-	 * .ConcatParams)
-	 */
 	@Override
-	public void validate(final ConcatParams concatParams) throws ValidationFailedException {
-		if (concatParams.getOutputFile() == null) {
-			throw new ValidationFailedException("Please specify a correct output file");
-		} else if (!concatParams.getFiles().isEmpty()) {
-			throw new ValidationFailedException(
-					"Files were provided to concatenate, but Directory concatenation type is set.");
-		} else if (StringUtils.isEmpty(concatParams.getDirectory())) {
-			throw new ValidationFailedException("No Directory set to concatenate files");
-		} else if (!new File(concatParams.getDirectory()).isDirectory()) {
-			throw new ValidationFailedException("Directory is not a directory! Check path.");
-		}
+	protected void configure() {
+		bind(Validator.class).annotatedWith(Names.named("filelist")).to(FileListValidator.class);
+		bind(Validator.class).annotatedWith(Names.named("directory")).to(DirectoryValidator.class);
+		bind(OutputSetup.class).to(DirectorySetup.class);
 	}
+
 }

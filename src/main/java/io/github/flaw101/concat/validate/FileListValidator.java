@@ -31,7 +31,7 @@ import io.github.flaw101.concat.ConcatParams;
 
 /**
  * Validates required params for File List Type.
- * 
+ *
  * @author Darren Forsythe
  * @since 1.1.0
  *
@@ -40,13 +40,13 @@ public class FileListValidator implements Validator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat
 	 * .ConcatParams)
 	 */
 	@Override
-	public void validate(ConcatParams concatParams) throws ValidationFailedException {
+	public void validate(final ConcatParams concatParams) throws ValidationFailedException {
 		if (concatParams.getOutputFile() == null) {
 			throw new ValidationFailedException("Please specify a correct output file");
 		} else if (concatParams.getFiles().isEmpty()) {
@@ -56,7 +56,7 @@ public class FileListValidator implements Validator {
 					"Directory param is set, when File List conccat type is set. These are mutually exclusive");
 		}
 
-		for (File file : concatParams.getFiles()) {
+		for (final File file : concatParams.getFiles()) {
 			if (!file.exists()) {
 				throw new ValidationFailedException(String.format("%s does not exist!", file.getAbsolutePath()));
 			}

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.flaw101</groupId>
 	<artifactId>concat-maven-plugin</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<packaging>maven-plugin</packaging>
 	<name>Concat Maven Plugin</name>
 	<description>Maven plugin that can concatenate several files into one new file.</description>
@@ -67,6 +67,11 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.plugin-testing</groupId>

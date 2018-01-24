@@ -23,12 +23,15 @@
  */
 package io.github.flaw101.concat.validate;
 
-import io.github.flaw101.concat.ConcantenationType;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 import io.github.flaw101.concat.ConcatParams;
+import io.github.flaw101.concat.service.ConcantenationType;
 
 /**
  * Validates the possible types of {@link ConcantenationType}'s.
- * 
+ *
  * @author Darren Forsythe
  * @since 1.1.0
  *
@@ -38,17 +41,14 @@ public class ValidatorService {
 	private final Validator directoryValidator;
 	private final Validator fileListValidator;
 
-	public ValidatorService() {
-		fileListValidator = new FileListValidator();
-		directoryValidator = new DirectoryValidator();
-	}
-
-	public ValidatorService(Validator directoryValidator, Validator fileListValidator) {
+	@Inject
+	public ValidatorService(@Named("directory") final Validator directoryValidator,
+			@Named("filelist") final Validator fileListValidator) {
 		this.directoryValidator = directoryValidator;
 		this.fileListValidator = fileListValidator;
 	}
 
-	public void validate(ConcatParams concatParams) throws ValidationFailedException {
+	public void validate(final ConcatParams concatParams) throws ValidationFailedException {
 		switch (concatParams.getConcatenationType()) {
 		case DIRECTORY:
 			directoryValidator.validate(concatParams);

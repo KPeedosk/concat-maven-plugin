@@ -38,6 +38,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	private static String NEWLINE = System.getProperty("line.separator");
 
 	/** {@inheritDoc} */
+	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -45,6 +46,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	@After
 	protected void tearDown() throws Exception {
 		super.tearDown();
@@ -75,7 +77,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 
 	@Test
 	public void testConcatNewline() throws Exception {
-		String expectedResult = "file1" + NEWLINE + "file2" + NEWLINE + "file3" + NEWLINE;
+		final String expectedResult = "file1" + NEWLINE + "file2" + NEWLINE + "file3" + NEWLINE;
 		execute("src/test/resources/test-newline-pom.xml", "concat", "target/concatfile.output", expectedResult);
 
 	}
@@ -84,7 +86,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	public void testMissingOutputParameter() throws Exception {
 		try {
 			execute("src/test/resources/test-missing-output-pom.xml", "concat", "bla", "nothing");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
 	}
@@ -93,7 +95,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	public void testMissingConcatParameter() throws Exception {
 		try {
 			execute("src/test/resources/test-missing-concat-pom.xml", "concat", "bla", "nothing");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ExceptionUtils.printRootCauseStackTrace(e);
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
@@ -103,7 +105,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	public void testDirectoryCompetingArgs() throws Exception {
 		try {
 			execute("src/test/resources/test-pom-directory-competing-args.xml", "concat", "bla", "nothing");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ExceptionUtils.printRootCauseStackTrace(e);
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
@@ -113,7 +115,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	public void testDirectoryMissingDirectory() throws Exception {
 		try {
 			execute("src/test/resources/test-pom-directory-missing-directory.xml", "concat", "bla", "nothing");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ExceptionUtils.printRootCauseStackTrace(e);
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
@@ -123,25 +125,26 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	public void testNotADirectory() throws Exception {
 		try {
 			execute("src/test/resources/test-pom-directory-not-a-directory.xml", "concat", "bla", "nothing");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ExceptionUtils.printRootCauseStackTrace(e);
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
 	}
 
-	private void execute(String pomPath, String mojo, String resultFile, String expectedResult) throws Exception {
-		File pom = getTestFile(pomPath);
+	private void execute(final String pomPath, final String mojo, final String resultFile, final String expectedResult)
+			throws Exception {
+		final File pom = getTestFile(pomPath);
 		assertNotNull(pom);
 		assertTrue(pom.exists());
 
-		ConcatMojo concatMojo = (ConcatMojo) lookupMojo(mojo, pom);
+		final ConcatMojo concatMojo = (ConcatMojo) lookupMojo(mojo, pom);
 		assertNotNull(concatMojo);
 		concatMojo.execute();
 
-		File outputFile = getTestFile(resultFile);
+		final File outputFile = getTestFile(resultFile);
 		assertNotNull(outputFile);
 		assertTrue(outputFile.exists());
-		String output = FileUtils.readFileToString(outputFile, Charset.forName("UTF-8"));
+		final String output = FileUtils.readFileToString(outputFile, Charset.forName("UTF-8"));
 		assertEquals(expectedResult, output);
 	}
 
