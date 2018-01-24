@@ -25,7 +25,7 @@ package io.github.flaw101.concat.validate;
 
 /**
  * Thrown if validation of the parameters fails.
- * 
+ *
  * @author Darren Forsythe
  * @since 1.1.0
  *
@@ -34,7 +34,7 @@ public class ValidationFailedException extends Exception {
 
 	private static final long serialVersionUID = 6524709569935802715L;
 
-	public ValidationFailedException(String message) {
+	public ValidationFailedException(final String message) {
 		super(message);
 	}
 }

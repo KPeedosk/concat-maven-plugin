@@ -101,3 +101,8 @@ Project uses semantic versioning.
 * Set Commons IO to 2.5.
   * UTF-8 is used to write and read files.
 * Use Toolchain to build against Java 6.
+
+### 1.1.2 ###
+
+* Updated to use Guice CDI
+  * Why not over engineer

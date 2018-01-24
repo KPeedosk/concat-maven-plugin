@@ -23,18 +23,33 @@
  */
 package io.github.flaw101.concat.service;
 
+import com.google.inject.Inject;
+
 import io.github.flaw101.concat.ConcatParams;
+import io.github.flaw101.concat.filewriter.FileWriterService;
+import io.github.flaw101.concat.validate.ValidationFailedException;
+import io.github.flaw101.concat.validate.ValidatorService;
 
 /**
- * Sets up the {@link ConcatParams#getFiles()} for non-default concatenation
- * Types
+ * Main service to handle the concat.
  * 
  * @author Darren Forsythe
- * @since 1.1.0
+ * @sicne 1.1.2
  *
  */
-public interface OutputSetup {
+public class ConcatService {
 
-	void setup(ConcatParams params);
+	private final ValidatorService validatorService;
+	private final FileWriterService fileWriterService;
 
+	@Inject
+	public ConcatService(final ValidatorService validatorService, final FileWriterService fileWriterService) {
+		this.validatorService = validatorService;
+		this.fileWriterService = fileWriterService;
+	}
+
+	public void concat(final ConcatParams params) throws ValidationFailedException {
+		validatorService.validate(params);
+		fileWriterService.writeToOutputfile(params);
+	}
 }

@@ -23,46 +23,8 @@
  */
 package io.github.flaw101.concat.service;
 
-import io.github.flaw101.concat.ConcatParams;
+public enum ConcantenationType {
 
-/**
- * Writes out to the Output file. Default is to just write the
- * {@link ConcatParams#getFiles()} to the Output file. Other types of
- * ConcatenationTypes will defer to other classes to setup the input files.
- * 
- * @author Darren Forsythe
- * @since 1.1.0
- *
- */
-public class FileWriterService {
-
-	private FileWriter defaultWriter;
-	private OutputSetup directorySetup;
-
-	public FileWriterService() {
-		directorySetup = new DirectorySetup();
-		defaultWriter = new FileWriter();
-
-	}
-
-	/**
-	 * Sets up, if required, and writes to the {@link ConcatParams#getOutputFile()}
-	 * 
-	 * @param concatParams
-	 *            - parameters for this plugin
-	 */
-	public void writeToOutputfile(ConcatParams concatParams) {
-		switch (concatParams.getConcatenationType()) {
-		case DIRECTORY:
-			directorySetup.setup(concatParams);
-			defaultWriter.write(concatParams);
-			break;
-		case FILE_LIST:
-			defaultWriter.write(concatParams);
-			break;
-		default:
-			throw new IllegalArgumentException("Concantenation Type not implemented");
-		}
-	}
+	FILE_LIST, DIRECTORY;
 
 }

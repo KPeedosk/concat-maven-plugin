@@ -29,20 +29,22 @@ import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
-import io.github.flaw101.concat.service.FileWriterService;
-import io.github.flaw101.concat.validate.ValidationFailedException;
-import io.github.flaw101.concat.validate.ValidatorService;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import io.github.flaw101.concat.service.ConcantenationType;
+import io.github.flaw101.concat.service.ConcatService;
 
 /**
  * Goal which concatenates several files and creates a new file as specified.
- * 
+ *
  * @Mojo( name = "concat" )
- * 
+ *
  * @goal concat
- * 
+ *
  * 		@Mojo( defaultPhase = "process-sources" )
  * @phase process-sources
- * 
+ *
  * @author Darren Forsythe
  * @since 1.0.0
  * @version 1.0.0
@@ -51,14 +53,14 @@ public class ConcatMojo extends AbstractMojo {
 
 	/**
 	 * Type of concatenation to perform
-	 * 
+	 *
 	 * @parameter
 	 */
-	private ConcantenationType concatenationType = ConcantenationType.FILE_LIST;
+	private final ConcantenationType concatenationType = ConcantenationType.FILE_LIST;
 
 	/**
 	 * The resulting file
-	 * 
+	 *
 	 * @parameter
 	 * @required
 	 */
@@ -66,7 +68,7 @@ public class ConcatMojo extends AbstractMojo {
 
 	/**
 	 * Files to concatenate if using {@link ConcantenationType#FILE_LIST}.
-	 * 
+	 *
 	 * @parameter
 	 */
 	private List<File> concatFiles;
@@ -74,48 +76,42 @@ public class ConcatMojo extends AbstractMojo {
 	/**
 	 * If using the {@link ConcantenationType#DIRECTORY} provide a directory of
 	 * which all files contained within it will be concatenated in natural ordering.
-	 * 
+	 *
 	 * @parameter
 	 */
 	private String directory;
 
 	/**
 	 * Append newline after each concatenation
-	 * 
+	 *
 	 * @parameter
 	 */
 	private boolean appendNewline = false;
 
 	/**
 	 * Deletes the target file before concatenation
-	 * 
+	 *
 	 * @parameter
 	 */
 	private boolean deleteTargetFile = false;
 
-	private ValidatorService validatorService = new ValidatorService();
-	private FileWriterService fileWriterService = new FileWriterService();
-
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.apache.maven.plugin.AbstractMojo#execute()
 	 */
+	@Override
 	public void execute() throws MojoExecutionException {
-		ConcatParams params = new ConcatParams(directory, concatFiles, outputFile, deleteTargetFile, appendNewline,
-				concatenationType);
-		try {
-			validatorService.validate(params);
-		} catch (ValidationFailedException e) {
-			getLog().error(e);
-			throw new MojoExecutionException("Validation Failed - Please check params", e);
-		}
+		final ConcatParams params = new ConcatParams(directory, concatFiles, outputFile, deleteTargetFile,
+				appendNewline, concatenationType);
 
+		final Injector injector = Guice.createInjector(new ConcatModule());
+		final ConcatService concatService = injector.getInstance(ConcatService.class);
 		try {
-			fileWriterService.writeToOutputfile(params);
-		} catch (Exception e) {
+			concatService.concat(params);
+		} catch (final Exception e) {
 			getLog().error(e);
-			throw new MojoExecutionException("Could not write to file.", e);
+			throw new MojoExecutionException("Failed to concat", e);
 		}
 	}
 

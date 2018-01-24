@@ -21,38 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.service;
+package io.github.flaw101.concat.filewriter;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
+import com.google.inject.Inject;
 
 import io.github.flaw101.concat.ConcatParams;
+import io.github.flaw101.concat.filewriter.setup.OutputSetup;
 
 /**
- * Sets up the params for Directory concatenation.
- * 
+ * Writes out to the Output file. Default is to just write the
+ * {@link ConcatParams#getFiles()} to the Output file. Other types of
+ * ConcatenationTypes will defer to other classes to setup the input files.
+ *
  * @author Darren Forsythe
  * @since 1.1.0
  *
  */
-public class DirectorySetup implements OutputSetup {
+public class FileWriterService {
 
-	@Override
-	public void setup(ConcatParams params) {
-		File directory = new File(params.getDirectory());
-		List<File> listFiles = (List<File>) FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null);
-		Collections.sort(listFiles, new Comparator<File>() {
-			@Override
-			public int compare(File o1, File o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
-		params.addAll(listFiles);
+	private final FileWriter defaultWriter;
+	private final OutputSetup directorySetup;
+
+	@Inject
+	public FileWriterService(final FileWriter defaultWriter, final OutputSetup directorySetup) {
+		super();
+		this.defaultWriter = defaultWriter;
+		this.directorySetup = directorySetup;
+	}
+
+	/**
+	 * Sets up, if required, and writes to the {@link ConcatParams#getOutputFile()}
+	 *
+	 * @param concatParams
+	 *            - parameters for this plugin
+	 */
+	public void writeToOutputfile(final ConcatParams concatParams) {
+		switch (concatParams.getConcatenationType()) {
+		case DIRECTORY:
+			directorySetup.setup(concatParams);
+			defaultWriter.write(concatParams);
+			break;
+		case FILE_LIST:
+			defaultWriter.write(concatParams);
+			break;
+		default:
+			throw new IllegalArgumentException("Concantenation Type not implemented");
+		}
 	}
 
 }

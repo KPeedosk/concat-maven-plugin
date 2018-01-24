@@ -21,20 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.service;
+package io.github.flaw101.concat.filewriter.setup;
+
+import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+
+import io.github.flaw101.concat.ConcatParams;
 
 /**
- * If there is any failure writing to the output.
- * 
+ * Sets up the params for Directory concatenation.
+ *
  * @author Darren Forsythe
  * @since 1.1.0
  *
  */
-public class CannotWriteToOutputFileException extends RuntimeException {
+public class DirectorySetup implements OutputSetup {
 
-	private static final long serialVersionUID = 75580154302458082L;
-
-	public CannotWriteToOutputFileException(Throwable throwable) {
-		super(throwable);
+	@Override
+	public void setup(final ConcatParams params) {
+		final File directory = new File(params.getDirectory());
+		final List<File> listFiles = (List<File>) FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(),
+				null);
+		Collections.sort(listFiles, new Comparator<File>() {
+			@Override
+			public int compare(final File o1, final File o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		params.addAll(listFiles);
 	}
+
 }

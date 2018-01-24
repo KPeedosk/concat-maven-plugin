@@ -28,13 +28,13 @@ import io.github.flaw101.concat.ConcatParams;
 /**
  * Defines a validator to check parameters required for the Execution that was
  * set.
- * 
+ *
  * @since 1.1.0
  * @author Darren Forsythe
  *
  */
 public interface Validator {
-	
+
 	void validate(ConcatParams concatParams) throws ValidationFailedException;
 
 }
