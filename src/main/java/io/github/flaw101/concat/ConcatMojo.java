@@ -56,7 +56,7 @@ public class ConcatMojo extends AbstractMojo {
 	 *
 	 * @parameter
 	 */
-	private final ConcantenationType concatenationType = ConcantenationType.FILE_LIST;
+	private ConcantenationType concatenationType = ConcantenationType.FILE_LIST;
 
 	/**
 	 * The resulting file

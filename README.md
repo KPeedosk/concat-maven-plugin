@@ -106,3 +106,7 @@ Project uses semantic versioning.
 
 * Updated to use Guice CDI
   * Why not over engineer
+
+### 1.1.3 ###
+
+* Remove final from `ConcatenationType` in mojo.
