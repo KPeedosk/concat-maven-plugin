@@ -87,4 +87,75 @@ public class ConcatParams {
 	public String getDirectory() {
 		return directory;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (appendNewline ? 1231 : 1237);
+		result = prime * result
+				+ ((concatenationType == null) ? 0 : concatenationType.hashCode());
+		result = prime * result + (deleteTargetFile ? 1231 : 1237);
+		result = prime * result + ((directory == null) ? 0 : directory.hashCode());
+		result = prime * result + (files.hashCode());
+		result = prime * result + ((outputFile == null) ? 0 : outputFile.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) { // NOSONAR
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof ConcatParams)) {
+			return false;
+		}
+		final ConcatParams other = (ConcatParams) obj;
+		if (appendNewline != other.appendNewline) {
+			return false;
+		}
+		if (concatenationType != other.concatenationType) {
+			return false;
+		}
+		if (deleteTargetFile != other.deleteTargetFile) {
+			return false;
+		}
+		if (directory == null) {
+			if (other.directory != null) {
+				return false;
+			}
+		}
+		else if (!directory.equals(other.directory)) {
+			return false;
+		}
+		if (other.files != null) {
+			return false;
+		}
+		else if (!files.equals(other.files)) {
+			return false;
+		}
+		if (outputFile == null) {
+			if (other.outputFile != null) {
+				return false;
+			}
+		}
+		else if (!outputFile.equals(other.outputFile)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("ConcatParams [directory=").append(directory)
+				.append(", outputFile=").append(outputFile).append(", deleteTargetFile=")
+				.append(deleteTargetFile).append(", appendNewline=").append(appendNewline)
+				.append(", files=").append(files).append(", concatenationType=")
+				.append(concatenationType).append("]");
+		return builder.toString();
+	}
 }

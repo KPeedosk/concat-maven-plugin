@@ -55,8 +55,9 @@ public class ConcatMojo extends AbstractMojo {
 	 * Type of concatenation to perform
 	 *
 	 * @parameter
+	 * @required
 	 */
-	private ConcantenationType concatenationType = ConcantenationType.FILE_LIST;
+	private ConcantenationType concatenationType;
 
 	/**
 	 * The resulting file
@@ -84,16 +85,16 @@ public class ConcatMojo extends AbstractMojo {
 	/**
 	 * Append newline after each concatenation
 	 *
-	 * @parameter
+	 * @parameter default-value="false"
 	 */
-	private boolean appendNewline = false;
+	private boolean appendNewline;
 
 	/**
 	 * Deletes the target file before concatenation
 	 *
-	 * @parameter
+	 * @parameter default-value="false"
 	 */
-	private boolean deleteTargetFile = false;
+	private boolean deleteTargetFile;
 
 	/*
 	 * (non-Javadoc)
@@ -104,7 +105,9 @@ public class ConcatMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException {
 		final ConcatParams params = new ConcatParams(directory, concatFiles, outputFile,
 				deleteTargetFile, appendNewline, concatenationType);
-
+		if (getLog().isDebugEnabled()) {
+			getLog().debug("Concatenating with params" + params.toString());
+		}
 		final Injector injector = Guice.createInjector(new ConcatModule());
 		final ConcatService concatService = injector.getInstance(ConcatService.class);
 		try {

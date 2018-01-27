@@ -119,3 +119,9 @@ Project uses semantic versioning.
 ### 1.1.3 ###
 
 * Remove final from `ConcatenationType` in mojo.
+
+### 1.2.0 ###
+
+* Make `concatenationType` required.
+* Add debug logger for the parmas if enable.
+* Move verification to CI profile

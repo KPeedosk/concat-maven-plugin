@@ -23,17 +23,14 @@
 				<artifactId>concat-maven-plugin</artifactId>
 				<configuration>
 					<outputFile>target/concatfile.output</outputFile>
+					<concatenationType>FILE_LIST</concatenationType>
 					<concatFiles>
-						<param>src/test/resources/testfiles/file_1.input</param>
-						<param>src/test/resources/testfiles/file_2.input</param>
-						<param>src/test/resources/testfiles/file_3.input</param>
+						<concatFile>src/test/resources/testfiles/file_1.input</concatFile>
+						<concatFile>src/test/resources/testfiles/file_2.input</concatFile>
+						<concatFile>src/test/resources/testfiles/file_3.input</concatFile>
 					</concatFiles>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-</project>
-
-
-
 </project>
