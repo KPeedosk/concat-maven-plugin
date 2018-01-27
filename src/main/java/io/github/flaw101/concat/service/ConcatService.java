@@ -32,24 +32,24 @@ import io.github.flaw101.concat.validate.ValidatorService;
 
 /**
  * Main service to handle the concat.
- * 
+ *
  * @author Darren Forsythe
  * @sicne 1.1.2
  *
  */
 public class ConcatService {
 
-	private final ValidatorService validatorService;
-	private final FileWriterService fileWriterService;
+    private final ValidatorService validatorService;
+    private final FileWriterService fileWriterService;
 
-	@Inject
-	public ConcatService(final ValidatorService validatorService, final FileWriterService fileWriterService) {
-		this.validatorService = validatorService;
-		this.fileWriterService = fileWriterService;
-	}
+    @Inject
+    public ConcatService(final ValidatorService validatorService, final FileWriterService fileWriterService) {
+        this.validatorService = validatorService;
+        this.fileWriterService = fileWriterService;
+    }
 
-	public void concat(final ConcatParams params) throws ValidationFailedException {
-		validatorService.validate(params);
-		fileWriterService.writeToOutputfile(params);
-	}
+    public void concat(final ConcatParams params) throws ValidationFailedException {
+        validatorService.validate(params);
+        fileWriterService.writeToOutputfile(params);
+    }
 }

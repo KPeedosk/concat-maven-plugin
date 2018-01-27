@@ -38,29 +38,29 @@ import io.github.flaw101.concat.ConcatParams;
  */
 public class FileListValidator implements Validator {
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat
-	 * .ConcatParams)
-	 */
-	@Override
-	public void validate(final ConcatParams concatParams) throws ValidationFailedException {
-		if (concatParams.getOutputFile() == null) {
-			throw new ValidationFailedException("Please specify a correct output file");
-		} else if (concatParams.getFiles().isEmpty()) {
-			throw new ValidationFailedException("No Files Provided to Concatenate");
-		} else if (StringUtils.isNotEmpty(concatParams.getDirectory())) {
-			throw new ValidationFailedException(
-					"Directory param is set, when File List conccat type is set. These are mutually exclusive");
-		}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat
+     * .ConcatParams)
+     */
+    @Override
+    public void validate(final ConcatParams concatParams) throws ValidationFailedException {
+        if (concatParams.getOutputFile() == null) {
+            throw new ValidationFailedException("Please specify a correct output file");
+        } else if (concatParams.getFiles().isEmpty()) {
+            throw new ValidationFailedException("No Files Provided to Concatenate");
+        } else if (StringUtils.isNotEmpty(concatParams.getDirectory())) {
+            throw new ValidationFailedException(
+                    "Directory param is set, when File List conccat type is set. These are mutually exclusive");
+        }
 
-		for (final File file : concatParams.getFiles()) {
-			if (!file.exists()) {
-				throw new ValidationFailedException(String.format("%s does not exist!", file.getAbsolutePath()));
-			}
-		}
-	}
+        for (final File file : concatParams.getFiles()) {
+            if (!file.exists()) {
+                throw new ValidationFailedException(String.format("%s does not exist!", file.getAbsolutePath()));
+            }
+        }
+    }
 
 }

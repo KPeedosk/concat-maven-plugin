@@ -19,6 +19,10 @@ This plugin is compiled against maven `3.2.5`, the last supported java 1.6 maven
 [![Build Status](https://travis-ci.org/Flaw101/concat-maven-plugin.svg?branch=master)](https://travis-ci.org/Flaw101/concat-maven-plugin)
 [![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/io/github/flaw101/concat-maven-plugin/maven-metadata.xml.svg)](http://repo1.maven.org/maven2/io/github/flaw101/concat-maven-plugin/)
 
+### Build ###
+
+Mutation Testing, Code Formatting, OWASP Dependency Analysis, POM Ordering is all checked as part of the Travis CI build.
+
 ## Concatenation Types ##
 
 Multiple methods of concatenating can be supported, the current implementions are,

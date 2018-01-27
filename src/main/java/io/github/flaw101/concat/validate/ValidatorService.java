@@ -38,26 +38,26 @@ import io.github.flaw101.concat.service.ConcantenationType;
  */
 public class ValidatorService {
 
-	private final Validator directoryValidator;
-	private final Validator fileListValidator;
+    private final Validator directoryValidator;
+    private final Validator fileListValidator;
 
-	@Inject
-	public ValidatorService(@Named("directory") final Validator directoryValidator,
-			@Named("filelist") final Validator fileListValidator) {
-		this.directoryValidator = directoryValidator;
-		this.fileListValidator = fileListValidator;
-	}
+    @Inject
+    public ValidatorService(@Named("directory") final Validator directoryValidator,
+            @Named("filelist") final Validator fileListValidator) {
+        this.directoryValidator = directoryValidator;
+        this.fileListValidator = fileListValidator;
+    }
 
-	public void validate(final ConcatParams concatParams) throws ValidationFailedException {
-		switch (concatParams.getConcatenationType()) {
-		case DIRECTORY:
-			directoryValidator.validate(concatParams);
-			break;
-		case FILE_LIST:
-			fileListValidator.validate(concatParams);
-			break;
-		default:
-			throw new IllegalArgumentException("Concantenation Type not implemented");
-		}
-	}
+    public void validate(final ConcatParams concatParams) throws ValidationFailedException {
+        switch (concatParams.getConcatenationType()) {
+            case DIRECTORY:
+                directoryValidator.validate(concatParams);
+                break;
+            case FILE_LIST:
+                fileListValidator.validate(concatParams);
+                break;
+            default:
+                throw new IllegalArgumentException("Concantenation Type not implemented");
+        }
+    }
 }

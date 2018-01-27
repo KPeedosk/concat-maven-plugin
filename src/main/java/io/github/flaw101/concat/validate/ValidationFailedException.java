@@ -32,9 +32,9 @@ package io.github.flaw101.concat.validate;
  */
 public class ValidationFailedException extends Exception {
 
-	private static final long serialVersionUID = 6524709569935802715L;
+    private static final long serialVersionUID = 6524709569935802715L;
 
-	public ValidationFailedException(final String message) {
-		super(message);
-	}
+    public ValidationFailedException(final String message) {
+        super(message);
+    }
 }

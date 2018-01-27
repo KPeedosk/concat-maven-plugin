@@ -35,6 +35,6 @@ import io.github.flaw101.concat.ConcatParams;
  */
 public interface Validator {
 
-	void validate(ConcatParams concatParams) throws ValidationFailedException;
+    void validate(ConcatParams concatParams) throws ValidationFailedException;
 
 }

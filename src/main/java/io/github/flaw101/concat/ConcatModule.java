@@ -41,11 +41,11 @@ import io.github.flaw101.concat.validate.Validator;
  */
 public class ConcatModule extends AbstractModule {
 
-	@Override
-	protected void configure() {
-		bind(Validator.class).annotatedWith(Names.named("filelist")).to(FileListValidator.class);
-		bind(Validator.class).annotatedWith(Names.named("directory")).to(DirectoryValidator.class);
-		bind(OutputSetup.class).to(DirectorySetup.class);
-	}
+    @Override
+    protected void configure() {
+        bind(Validator.class).annotatedWith(Names.named("filelist")).to(FileListValidator.class);
+        bind(Validator.class).annotatedWith(Names.named("directory")).to(DirectoryValidator.class);
+        bind(OutputSetup.class).to(DirectorySetup.class);
+    }
 
 }

@@ -40,50 +40,50 @@ import io.github.flaw101.concat.service.ConcantenationType;
  */
 public class ConcatParams {
 
-	private final String directory;
-	private final File outputFile;
-	private final boolean deleteTargetFile;
-	private final boolean appendNewline;
-	private final Collection<File> files = new ArrayList<File>();
-	private final ConcantenationType concatenationType;
+    private final String directory;
+    private final File outputFile;
+    private final boolean deleteTargetFile;
+    private final boolean appendNewline;
+    private final Collection<File> files = new ArrayList<File>();
+    private final ConcantenationType concatenationType;
 
-	public ConcatParams(final String directory, final List<File> files, final File outputFile,
-			final boolean deleteTargetFile, final boolean appendNewline, final ConcantenationType concatentationType) {
-		this.directory = directory;
-		if (files != null) {
-			this.files.addAll(files);
-		}
-		this.concatenationType = concatentationType;
-		this.outputFile = outputFile;
-		this.deleteTargetFile = deleteTargetFile;
-		this.appendNewline = appendNewline;
-	}
+    public ConcatParams(final String directory, final List<File> files, final File outputFile,
+            final boolean deleteTargetFile, final boolean appendNewline, final ConcantenationType concatentationType) {
+        this.directory = directory;
+        if (files != null) {
+            this.files.addAll(files);
+        }
+        this.concatenationType = concatentationType;
+        this.outputFile = outputFile;
+        this.deleteTargetFile = deleteTargetFile;
+        this.appendNewline = appendNewline;
+    }
 
-	public boolean isAppendNewline() {
-		return appendNewline;
-	}
+    public boolean isAppendNewline() {
+        return appendNewline;
+    }
 
-	public File getOutputFile() {
-		return outputFile;
-	}
+    public File getOutputFile() {
+        return outputFile;
+    }
 
-	public boolean isDeleteTargetFile() {
-		return deleteTargetFile;
-	}
+    public boolean isDeleteTargetFile() {
+        return deleteTargetFile;
+    }
 
-	public ConcantenationType getConcatenationType() {
-		return concatenationType;
-	}
+    public ConcantenationType getConcatenationType() {
+        return concatenationType;
+    }
 
-	public Collection<File> getFiles() {
-		return Collections.unmodifiableCollection(files);
-	}
+    public Collection<File> getFiles() {
+        return Collections.unmodifiableCollection(files);
+    }
 
-	public void addAll(final Collection<File> files) {
-		this.files.addAll(files);
-	}
+    public void addAll(final Collection<File> files) {
+        this.files.addAll(files);
+    }
 
-	public String getDirectory() {
-		return directory;
-	}
+    public String getDirectory() {
+        return directory;
+    }
 }

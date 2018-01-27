@@ -167,7 +167,7 @@
 				<executions>
 					<execution>
 						<id>verify-pom-order</id>
-						<phase>verify</phase>
+						<phase>process-sources</phase>
 						<goals>
 							<goal>verify</goal>
 						</goals>
@@ -180,7 +180,7 @@
 				<version>3.1.0</version>
 				<executions>
 					<execution>
-						<phase>verify</phase>
+						<phase>process-sources</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
@@ -208,6 +208,22 @@
 							<threads>4</threads>
 							<coverageThreshold>86</coverageThreshold>
 							<mutationThreshold>90</mutationThreshold>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>net.revelc.code.formatter</groupId>
+				<artifactId>formatter-maven-plugin</artifactId>
+				<version>2.7.1</version>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+						<configuration>
+							<configFile>.formatter.xml</configFile>
 						</configuration>
 					</execution>
 				</executions>

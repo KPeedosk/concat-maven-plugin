@@ -39,34 +39,34 @@ import io.github.flaw101.concat.filewriter.setup.OutputSetup;
  */
 public class FileWriterService {
 
-	private final FileWriter defaultWriter;
-	private final OutputSetup directorySetup;
+    private final FileWriter defaultWriter;
+    private final OutputSetup directorySetup;
 
-	@Inject
-	public FileWriterService(final FileWriter defaultWriter, final OutputSetup directorySetup) {
-		super();
-		this.defaultWriter = defaultWriter;
-		this.directorySetup = directorySetup;
-	}
+    @Inject
+    public FileWriterService(final FileWriter defaultWriter, final OutputSetup directorySetup) {
+        super();
+        this.defaultWriter = defaultWriter;
+        this.directorySetup = directorySetup;
+    }
 
-	/**
-	 * Sets up, if required, and writes to the {@link ConcatParams#getOutputFile()}
-	 *
-	 * @param concatParams
-	 *            - parameters for this plugin
-	 */
-	public void writeToOutputfile(final ConcatParams concatParams) {
-		switch (concatParams.getConcatenationType()) {
-		case DIRECTORY:
-			directorySetup.setup(concatParams);
-			defaultWriter.write(concatParams);
-			break;
-		case FILE_LIST:
-			defaultWriter.write(concatParams);
-			break;
-		default:
-			throw new IllegalArgumentException("Concantenation Type not implemented");
-		}
-	}
+    /**
+     * Sets up, if required, and writes to the {@link ConcatParams#getOutputFile()}
+     *
+     * @param concatParams
+     *            - parameters for this plugin
+     */
+    public void writeToOutputfile(final ConcatParams concatParams) {
+        switch (concatParams.getConcatenationType()) {
+            case DIRECTORY:
+                directorySetup.setup(concatParams);
+                defaultWriter.write(concatParams);
+                break;
+            case FILE_LIST:
+                defaultWriter.write(concatParams);
+                break;
+            default:
+                throw new IllegalArgumentException("Concantenation Type not implemented");
+        }
+    }
 
 }

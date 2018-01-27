@@ -35,6 +35,6 @@ import io.github.flaw101.concat.ConcatParams;
  */
 public interface OutputSetup {
 
-	void setup(ConcatParams params);
+    void setup(ConcatParams params);
 
 }
