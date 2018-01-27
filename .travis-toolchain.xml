@@ -9,7 +9,7 @@
             <vendor>oracle</vendor>
         </provides>
         <configuration>
-            <jdkHome>/usr/lib/jvm/java-6-oracle</jdkHome>
+            <jdkHome>/usr/lib/jvm/java-6-openjdk-amd64/</jdkHome>
         </configuration>
     </toolchain>
 </toolchains>
