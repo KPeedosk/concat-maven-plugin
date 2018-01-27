@@ -34,7 +34,7 @@ import io.github.flaw101.concat.validate.ValidatorService;
  * Main service to handle the concat.
  *
  * @author Darren Forsythe
- * @sicne 1.1.2
+ * @since 1.1.2
  *
  */
 public class ConcatService {

@@ -7,11 +7,14 @@ Forked from [Bomas Contcat Maven Plugin](https://github.com/bomas/concat-maven-p
 This plugin is compiled against maven `3.2.5`, the last supported java 1.6 maven release, hosted on Maven Central.
 
 ```xml
-<dependency>
+<plugin>
     <groupId>io.github.flaw101</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <version><!-- A Version --> </version>
-</dependency>
+    <configuration>
+      <!-- Configure me -->
+    </configuration>
+</plugin>
 ```
 
 ## Build Info ##
@@ -49,11 +52,12 @@ A basic example, which will concat the `.input` files to the `concatfile.output`
     <groupId>io.github.flaw101</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <configuration>
+        <concatenationType>FILE_LIST</concatenationType>
         <outputFile>target/concatfile.output</outputFile>
         <concatFiles>
-            <param>src/test/resources/testfiles/file_1.input</param>
-            <param>src/test/resources/testfiles/file_2.input</param>
-            <param>src/test/resources/testfiles/file_3.input</param>
+            <concatFile>src/test/resources/testfiles/file_1.input</concatFile>
+            <concatFile>src/test/resources/testfiles/file_2.input</concatFile>
+            <concatFile>src/test/resources/testfiles/file_3.input</concatFile>
         </concatFiles>
     </configuration>
 </plugin>
@@ -89,12 +93,6 @@ Will concat all files in the directory to the output file.
   * When using `ConcatenationType.DIRECTORY` specify the directory from which to get all files. Natural ordering of the file name is used to sort the files.
 
 ## Change Log ##
-
-Project uses semantic versioning.
-
-1. Major - Breaking changes.
-1. Minor - New backwards compatible change.
-1. Patch - Bug fixes, polish etc.
 
 ### 1.0.0 ###
 
