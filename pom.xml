@@ -222,11 +222,11 @@
 						<goals>
 							<goal>validate</goal>
 						</goals>
-						<configuration>
-							<configFile>.formatter.xml</configFile>
-						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<configFile>.formatter.xml</configFile>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
