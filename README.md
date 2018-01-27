@@ -14,6 +14,10 @@ This plugin is compiled against maven `3.2.5`, the last supported java 1.6 maven
 </dependency>
 ```
 
+## Build ##
+
+[![Build Status](https://travis-ci.org/Flaw101/concat-maven-plugin.svg?branch=master)](https://travis-ci.org/Flaw101/concat-maven-plugin)
+
 ## Concatenation Types ##
 
 Multiple methods of concatenating can be supported, the current implementions are,
