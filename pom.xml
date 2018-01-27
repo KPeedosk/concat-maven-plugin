@@ -225,7 +225,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<configFile>.formatter.xml</configFile>
+					<configFile>/.formatter.xml</configFile>
 				</configuration>
 			</plugin>
 		</plugins>
