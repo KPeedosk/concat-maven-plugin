@@ -212,9 +212,14 @@
 									<excludedClasses>
 										<excludedClasse>*HelpMojo*</excludedClasse>
 									</excludedClasses>
+									<excludedMethods>
+										<excludedMethod>toString</excludedMethod>
+										<excludedMethod>equals</excludedMethod>
+										<excludedMethod>hashCode</excludedMethod>
+									</excludedMethods>
 									<threads>4</threads>
-									<coverageThreshold>86</coverageThreshold>
-									<mutationThreshold>90</mutationThreshold>
+									<coverageThreshold>68</coverageThreshold>
+									<mutationThreshold>88</mutationThreshold>
 								</configuration>
 							</execution>
 						</executions>
