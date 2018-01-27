@@ -26,8 +26,7 @@ package io.github.flaw101.concat.filewriter.setup;
 import io.github.flaw101.concat.ConcatParams;
 
 /**
- * Sets up the {@link ConcatParams#getFiles()} for non-default concatenation
- * Types
+ * Sets up the {@link ConcatParams#getFiles()} for non-default concatenation Types
  *
  * @author Darren Forsythe
  * @since 1.1.0

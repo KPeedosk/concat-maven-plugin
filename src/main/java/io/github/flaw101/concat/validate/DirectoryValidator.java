@@ -41,9 +41,7 @@ public class DirectoryValidator implements Validator {
     /*
      * (non-Javadoc)
      *
-     * @see
-     * io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat
-     * .ConcatParams)
+     * @see io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat .ConcatParams)
      */
     @Override
     public void validate(final ConcatParams concatParams) throws ValidationFailedException {

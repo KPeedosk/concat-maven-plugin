@@ -50,14 +50,14 @@ public class ValidatorService {
 
     public void validate(final ConcatParams concatParams) throws ValidationFailedException {
         switch (concatParams.getConcatenationType()) {
-            case DIRECTORY:
-                directoryValidator.validate(concatParams);
-                break;
-            case FILE_LIST:
-                fileListValidator.validate(concatParams);
-                break;
-            default:
-                throw new IllegalArgumentException("Concantenation Type not implemented");
+        case DIRECTORY:
+            directoryValidator.validate(concatParams);
+            break;
+        case FILE_LIST:
+            fileListValidator.validate(concatParams);
+            break;
+        default:
+            throw new IllegalArgumentException("Concantenation Type not implemented");
         }
     }
 }

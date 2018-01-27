@@ -26,8 +26,7 @@ package io.github.flaw101.concat.validate;
 import io.github.flaw101.concat.ConcatParams;
 
 /**
- * Defines a validator to check parameters required for the Execution that was
- * set.
+ * Defines a validator to check parameters required for the Execution that was set.
  *
  * @since 1.1.0
  * @author Darren Forsythe

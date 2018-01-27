@@ -74,8 +74,8 @@ public class ConcatMojo extends AbstractMojo {
     private List<File> concatFiles;
 
     /**
-     * If using the {@link ConcantenationType#DIRECTORY} provide a directory of
-     * which all files contained within it will be concatenated in natural ordering.
+     * If using the {@link ConcantenationType#DIRECTORY} provide a directory of which all files contained within it will
+     * be concatenated in natural ordering.
      *
      * @parameter
      */
