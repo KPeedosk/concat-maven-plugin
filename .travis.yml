@@ -9,7 +9,7 @@ before_install:
   - cp .travis-toolchain.xml ~/.m2/toolchains.xml
 install: true
 script: 
-  - mvn verify -B
+  - mvn verify -B -P ci
 addons:
   apt:
     packages: 
