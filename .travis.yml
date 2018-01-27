@@ -8,6 +8,8 @@ cache:
 before_install:
   - sudo ls
   - cp .travis-toolchain.xml ~/.m2/toolchains.xml
+script: 
+  - mvn verify -B
 addons:
   apt:
     packages: 
