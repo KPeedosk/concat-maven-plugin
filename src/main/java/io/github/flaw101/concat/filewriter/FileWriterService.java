@@ -29,8 +29,9 @@ import io.github.flaw101.concat.ConcatParams;
 import io.github.flaw101.concat.filewriter.setup.OutputSetup;
 
 /**
- * Writes out to the Output file. Default is to just write the {@link ConcatParams#getFiles()} to the Output file. Other
- * types of ConcatenationTypes will defer to other classes to setup the input files.
+ * Writes out to the Output file. Default is to just write the
+ * {@link ConcatParams#getFiles()} to the Output file. Other types of ConcatenationTypes
+ * will defer to other classes to setup the input files.
  *
  * @author Darren Forsythe
  * @since 1.1.0
@@ -38,34 +39,34 @@ import io.github.flaw101.concat.filewriter.setup.OutputSetup;
  */
 public class FileWriterService {
 
-    private final FileWriter defaultWriter;
-    private final OutputSetup directorySetup;
+	private final FileWriter defaultWriter;
+	private final OutputSetup directorySetup;
 
-    @Inject
-    public FileWriterService(final FileWriter defaultWriter, final OutputSetup directorySetup) {
-        super();
-        this.defaultWriter = defaultWriter;
-        this.directorySetup = directorySetup;
-    }
+	@Inject
+	public FileWriterService(final FileWriter defaultWriter,
+			final OutputSetup directorySetup) {
+		super();
+		this.defaultWriter = defaultWriter;
+		this.directorySetup = directorySetup;
+	}
 
-    /**
-     * Sets up, if required, and writes to the {@link ConcatParams#getOutputFile()}
-     *
-     * @param concatParams
-     *            - parameters for this plugin
-     */
-    public void writeToOutputfile(final ConcatParams concatParams) {
-        switch (concatParams.getConcatenationType()) {
-        case DIRECTORY:
-            directorySetup.setup(concatParams);
-            defaultWriter.write(concatParams);
-            break;
-        case FILE_LIST:
-            defaultWriter.write(concatParams);
-            break;
-        default:
-            throw new IllegalArgumentException("Concantenation Type not implemented");
-        }
-    }
+	/**
+	 * Sets up, if required, and writes to the {@link ConcatParams#getOutputFile()}
+	 *
+	 * @param concatParams - parameters for this plugin
+	 */
+	public void writeToOutputfile(final ConcatParams concatParams) {
+		switch (concatParams.getConcatenationType()) {
+		case DIRECTORY:
+			directorySetup.setup(concatParams);
+			defaultWriter.write(concatParams);
+			break;
+		case FILE_LIST:
+			defaultWriter.write(concatParams);
+			break;
+		default:
+			throw new IllegalArgumentException("Concantenation Type not implemented");
+		}
+	}
 
 }

@@ -32,9 +32,9 @@ package io.github.flaw101.concat.filewriter;
  */
 public class CannotWriteToOutputFileException extends RuntimeException {
 
-    private static final long serialVersionUID = 75580154302458082L;
+	private static final long serialVersionUID = 75580154302458082L;
 
-    public CannotWriteToOutputFileException(final Throwable throwable) {
-        super(throwable);
-    }
+	public CannotWriteToOutputFileException(final Throwable throwable) {
+		super(throwable);
+	}
 }
