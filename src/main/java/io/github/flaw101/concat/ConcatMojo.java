@@ -42,7 +42,7 @@ import io.github.flaw101.concat.service.ConcatService;
  *
  * @goal concat
  *
- * @Mojo( defaultPhase = "process-sources" )
+ *       @Mojo( defaultPhase = "process-sources" )
  * @phase process-sources
  *
  * @author Darren Forsythe
@@ -51,72 +51,79 @@ import io.github.flaw101.concat.service.ConcatService;
  */
 public class ConcatMojo extends AbstractMojo {
 
-	/**
-	 * Type of concatenation to perform
-	 *
-	 * @parameter
-	 * @required
-	 */
-	private ConcantenationType concatenationType;
+    /**
+     * Type of concatenation to perform
+     *
+     * @parameter
+     * @required
+     */
+    private ConcantenationType concatenationType;
 
-	/**
-	 * The resulting file
-	 *
-	 * @parameter
-	 * @required
-	 */
-	private File outputFile;
+    /**
+     * The resulting file
+     *
+     * @parameter
+     * @required
+     */
+    private File outputFile;
 
-	/**
-	 * Files to concatenate if using {@link ConcantenationType#FILE_LIST}.
-	 *
-	 * @parameter
-	 */
-	private List<File> concatFiles;
+    /**
+     * Files to concatenate if using {@link ConcantenationType#FILE_LIST}.
+     *
+     * @parameter
+     */
+    private List<File> concatFiles;
 
-	/**
-	 * If using the {@link ConcantenationType#DIRECTORY} provide a directory of which all
-	 * files contained within it will be concatenated in natural ordering.
-	 *
-	 * @parameter
-	 */
-	private String directory;
+    /**
+     * If using the {@link ConcantenationType#DIRECTORY} provide a directory of which all files contained within it will
+     * be concatenated in natural ordering.
+     *
+     * @parameter
+     */
+    private String directory;
 
-	/**
-	 * Append newline after each concatenation
-	 *
-	 * @parameter default-value="false"
-	 */
-	private boolean appendNewline;
+    /**
+     * Append newline after each concatenation
+     *
+     * @parameter default-value="false"
+     */
+    private boolean appendNewline;
 
-	/**
-	 * Deletes the target file before concatenation
-	 *
-	 * @parameter default-value="false"
-	 */
-	private boolean deleteTargetFile;
+    /**
+     * Deletes the target file before concatenation
+     *
+     * @parameter default-value="false"
+     */
+    private boolean deleteTargetFile;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.apache.maven.plugin.AbstractMojo#execute()
-	 */
-	@Override
-	public void execute() throws MojoExecutionException {
-		final ConcatParams params = new ConcatParams(directory, concatFiles, outputFile,
-				deleteTargetFile, appendNewline, concatenationType);
-		if (getLog().isDebugEnabled()) {
-			getLog().debug("Concatenating with params" + params.toString());
-		}
-		final Injector injector = Guice.createInjector(new ConcatModule());
-		final ConcatService concatService = injector.getInstance(ConcatService.class);
-		try {
-			concatService.concat(params);
-		}
-		catch (final Exception e) {
-			getLog().error(e);
-			throw new MojoExecutionException("Failed to concat", e);
-		}
-	}
+    /**
+     * If using {@link ConcantenationType#DIRECTORY} you can specify the file you wish to start, the rest will follow in
+     * natural order.
+     *
+     * @parameter
+     */
+    private File startingFile;
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.apache.maven.plugin.AbstractMojo#execute()
+     */
+    @Override
+    public void execute() throws MojoExecutionException {
+        final ConcatParams params = new ConcatParams(directory, concatFiles, outputFile, deleteTargetFile,
+                appendNewline, concatenationType, startingFile);
+        if (getLog().isDebugEnabled()) {
+            getLog().debug("Concatenating with params" + params.toString());
+        }
+        final Injector injector = Guice.createInjector(new ConcatModule());
+        final ConcatService concatService = injector.getInstance(ConcatService.class);
+        try {
+            concatService.concat(params);
+        } catch (final Exception e) {
+            getLog().error(e);
+            throw new MojoExecutionException("Failed to concat", e);
+        }
+    }
 
 }

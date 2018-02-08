@@ -42,18 +42,21 @@ import io.github.flaw101.concat.ConcatParams;
  */
 public class DirectorySetup implements OutputSetup {
 
-	@Override
-	public void setup(final ConcatParams params) {
-		final File directory = new File(params.getDirectory());
-		final List<File> listFiles = (List<File>) FileUtils.listFiles(directory,
-				FileFilterUtils.fileFileFilter(), null);
-		Collections.sort(listFiles, new Comparator<File>() {
-			@Override
-			public int compare(final File o1, final File o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
-		params.addAll(listFiles);
-	}
+    @Override
+    public void setup(final ConcatParams params) {
+        final File directory = new File(params.getDirectory());
+        if (params.getStartingFile() != null) {
+            params.add(params.getStartingFile());
+        }
+        final List<File> listFiles = (List<File>) FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(),
+                null);
+        Collections.sort(listFiles, new Comparator<File>() {
+            @Override
+            public int compare(final File o1, final File o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        params.addAll(listFiles);
+    }
 
 }

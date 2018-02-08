@@ -40,27 +40,24 @@ import io.github.flaw101.concat.ConcatParams;
  */
 public class FileWriter {
 
-	private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
+    private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
 
-	public void write(final ConcatParams params) {
-		final File outputFile = params.getOutputFile();
-		if (params.isDeleteTargetFile()) {
-			FileUtils.deleteQuietly(params.getOutputFile());
-		}
-		try {
-			for (final File inputFile : params.getFiles()) {
-				final String input = FileUtils.readFileToString(inputFile, CHARSET_UTF_8);
-				FileUtils.writeStringToFile(params.getOutputFile(), input, CHARSET_UTF_8,
-						true);
-				if (params.isAppendNewline()) {
-					FileUtils.writeStringToFile(outputFile,
-							System.getProperty("line.separator"), CHARSET_UTF_8, true);
+    public void write(final ConcatParams params) {
+        final File outputFile = params.getOutputFile();
+        if (params.isDeleteTargetFile()) {
+            FileUtils.deleteQuietly(params.getOutputFile());
+        }
+        try {
+            for (final File inputFile : params.getFiles()) {
+                final String input = FileUtils.readFileToString(inputFile, CHARSET_UTF_8);
+                FileUtils.writeStringToFile(params.getOutputFile(), input, CHARSET_UTF_8, true);
+                if (params.isAppendNewline()) {
+                    FileUtils.writeStringToFile(outputFile, System.getProperty("line.separator"), CHARSET_UTF_8, true);
 
-				}
-			}
-		}
-		catch (final IOException e) {
-			throw new CannotWriteToOutputFileException(e);
-		}
-	}
+                }
+            }
+        } catch (final IOException e) {
+            throw new CannotWriteToOutputFileException(e);
+        }
+    }
 }

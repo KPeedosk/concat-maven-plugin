@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn formatter:format
+mvn net.revelc.code.formatter:formatter-maven-plugin:format

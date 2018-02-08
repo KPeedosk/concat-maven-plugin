@@ -25,6 +25,6 @@ package io.github.flaw101.concat.service;
 
 public enum ConcantenationType {
 
-	FILE_LIST, DIRECTORY;
+    FILE_LIST, DIRECTORY;
 
 }
