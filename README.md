@@ -123,3 +123,8 @@ Will concat all files in the directory to the output file.
 * Make `concatenationType` required.
 * Add debug logger for the parmas if enable.
 * Move verification to CI profile
+
+### 1.3.0 ###
+
+* Add `startingFile` param used in `DIRECTORY` concatenation.
+  * If specified this file will be the first file to be concatenated to with the rest following with natural ordering.
