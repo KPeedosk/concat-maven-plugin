@@ -148,10 +148,9 @@ public class ConcatParams {
         } else if (!directory.equals(other.directory)) {
             return false;
         }
-        if (files == null) {
-            if (other.files != null) {
-                return false;
-            }
+        if (other.files != null) {
+            return false;
+
         } else if (!files.equals(other.files)) {
             return false;
         }
