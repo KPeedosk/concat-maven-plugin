@@ -218,7 +218,7 @@
 										<excludedMethod>hashCode</excludedMethod>
 									</excludedMethods>
 									<threads>4</threads>
-									<coverageThreshold>68</coverageThreshold>
+									<coverageThreshold>66</coverageThreshold>
 									<mutationThreshold>88</mutationThreshold>
 								</configuration>
 							</execution>

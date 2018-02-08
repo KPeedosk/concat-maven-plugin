@@ -118,6 +118,16 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
     }
 
     @Test
+    public void testListCompetingArgs() throws Exception {
+        try {
+            execute("src/test/resources/test-pom-competing-arguments.xml", "concat", "bla", "nothing");
+        } catch (final Exception e) {
+            ExceptionUtils.printRootCauseStackTrace(e);
+            assertEquals(MojoExecutionException.class, e.getClass());
+        }
+    }
+
+    @Test
     public void testDirectoryMissingDirectory() throws Exception {
         try {
             execute("src/test/resources/test-pom-directory-missing-directory.xml", "concat", "bla", "nothing");
