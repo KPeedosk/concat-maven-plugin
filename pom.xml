@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.flaw101</groupId>
 	<artifactId>concat-maven-plugin</artifactId>
-	<version>1.2.0</version>
+	<version>1.3.0</version>
 	<packaging>maven-plugin</packaging>
 	<name>Concat Maven Plugin</name>
 	<description>Maven plugin that can concatenate several files into one new file.</description>
@@ -218,7 +218,7 @@
 										<excludedMethod>hashCode</excludedMethod>
 									</excludedMethods>
 									<threads>4</threads>
-									<coverageThreshold>68</coverageThreshold>
+									<coverageThreshold>66</coverageThreshold>
 									<mutationThreshold>88</mutationThreshold>
 								</configuration>
 							</execution>

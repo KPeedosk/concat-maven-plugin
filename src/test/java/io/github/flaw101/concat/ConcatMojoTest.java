@@ -65,6 +65,12 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	}
 
 	@Test
+	public void testConcat_Directory_StartingFile() throws Exception {
+		execute("src/test/resources/test-pom-directory-with-starting-file.xml", "concat",
+				"target/concatfile.output", "startfile1file2file3");
+	}
+
+	@Test
 	public void testConcatShouldNotDeleteTarget() throws Exception {
 		FileUtils.copyFile(new File("src/test/resources/testfiles/file_1.input"),
 				new File("target/concatfile.output"));
@@ -116,6 +122,18 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	public void testDirectoryCompetingArgs() throws Exception {
 		try {
 			execute("src/test/resources/test-pom-directory-competing-args.xml", "concat",
+					"bla", "nothing");
+		}
+		catch (final Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			assertEquals(MojoExecutionException.class, e.getClass());
+		}
+	}
+
+	@Test
+	public void testListCompetingArgs() throws Exception {
+		try {
+			execute("src/test/resources/test-pom-competing-arguments.xml", "concat",
 					"bla", "nothing");
 		}
 		catch (final Exception e) {

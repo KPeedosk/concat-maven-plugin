@@ -91,6 +91,8 @@ Will concat all files in the directory to the output file.
   * For selecting different types of concatentation implementations. Defaults to requiring a list of files as specified in the basic example.
 * `directory`
   * When using `ConcatenationType.DIRECTORY` specify the directory from which to get all files. Natural ordering of the file name is used to sort the files.
+* `startingFile`
+  * When using directory this file will be used as the starting file for concatenation.
 
 ## Change Log ##
 
@@ -123,3 +125,8 @@ Will concat all files in the directory to the output file.
 * Make `concatenationType` required.
 * Add debug logger for the parmas if enable.
 * Move verification to CI profile
+
+### 1.3.0 ###
+
+* Add `startingFile` param used in `DIRECTORY` concatenation.
+  * If specified this file will be the first file to be concatenated to with the rest following with natural ordering.

@@ -24,10 +24,9 @@
 package io.github.flaw101.concat;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedList;
 
 import io.github.flaw101.concat.service.ConcantenationType;
 
@@ -44,20 +43,22 @@ public class ConcatParams {
 	private final File outputFile;
 	private final boolean deleteTargetFile;
 	private final boolean appendNewline;
-	private final Collection<File> files = new ArrayList<File>();
+	private final Collection<File> files = new LinkedList<File>();
 	private final ConcantenationType concatenationType;
+	private final File startingFile;
 
-	public ConcatParams(final String directory, final List<File> files,
-			final File outputFile, final boolean deleteTargetFile,
-			final boolean appendNewline, final ConcantenationType concatentationType) {
+	public ConcatParams(String directory, Collection<File> files, File outputFile,
+			boolean deleteTargetFile, boolean appendNewline,
+			ConcantenationType concatenationType, File startingFile) {
 		this.directory = directory;
 		if (files != null) {
 			this.files.addAll(files);
 		}
-		this.concatenationType = concatentationType;
+		this.concatenationType = concatenationType;
 		this.outputFile = outputFile;
 		this.deleteTargetFile = deleteTargetFile;
 		this.appendNewline = appendNewline;
+		this.startingFile = startingFile;
 	}
 
 	public boolean isAppendNewline() {
@@ -84,8 +85,28 @@ public class ConcatParams {
 		this.files.addAll(files);
 	}
 
+	public void add(final File file) {
+		this.files.add(file);
+	}
+
 	public String getDirectory() {
 		return directory;
+	}
+
+	public File getStartingFile() {
+		return startingFile;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("ConcatParams [directory=").append(directory)
+				.append(", outputFile=").append(outputFile).append(", deleteTargetFile=")
+				.append(deleteTargetFile).append(", appendNewline=").append(appendNewline)
+				.append(", files=").append(files).append(", concatenationType=")
+				.append(concatenationType).append(", startingFile=").append(startingFile)
+				.append("]");
+		return builder.toString();
 	}
 
 	@Override
@@ -97,13 +118,14 @@ public class ConcatParams {
 				+ ((concatenationType == null) ? 0 : concatenationType.hashCode());
 		result = prime * result + (deleteTargetFile ? 1231 : 1237);
 		result = prime * result + ((directory == null) ? 0 : directory.hashCode());
-		result = prime * result + (files.hashCode());
+		result = prime * result + ((files == null) ? 0 : files.hashCode());
 		result = prime * result + ((outputFile == null) ? 0 : outputFile.hashCode());
+		result = prime * result + ((startingFile == null) ? 0 : startingFile.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) { // NOSONAR
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -133,6 +155,7 @@ public class ConcatParams {
 		}
 		if (other.files != null) {
 			return false;
+
 		}
 		else if (!files.equals(other.files)) {
 			return false;
@@ -145,17 +168,14 @@ public class ConcatParams {
 		else if (!outputFile.equals(other.outputFile)) {
 			return false;
 		}
+		if (startingFile == null) {
+			if (other.startingFile != null) {
+				return false;
+			}
+		}
+		else if (!startingFile.equals(other.startingFile)) {
+			return false;
+		}
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		builder.append("ConcatParams [directory=").append(directory)
-				.append(", outputFile=").append(outputFile).append(", deleteTargetFile=")
-				.append(deleteTargetFile).append(", appendNewline=").append(appendNewline)
-				.append(", files=").append(files).append(", concatenationType=")
-				.append(concatenationType).append("]");
-		return builder.toString();
 	}
 }

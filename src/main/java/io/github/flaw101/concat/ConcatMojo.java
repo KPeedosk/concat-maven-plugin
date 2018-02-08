@@ -96,6 +96,14 @@ public class ConcatMojo extends AbstractMojo {
 	 */
 	private boolean deleteTargetFile;
 
+	/**
+	 * If using {@link ConcantenationType#DIRECTORY} you can specify the file you wish to
+	 * start, the rest will follow in natural order.
+	 *
+	 * @parameter
+	 */
+	private File startingFile;
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -104,7 +112,7 @@ public class ConcatMojo extends AbstractMojo {
 	@Override
 	public void execute() throws MojoExecutionException {
 		final ConcatParams params = new ConcatParams(directory, concatFiles, outputFile,
-				deleteTargetFile, appendNewline, concatenationType);
+				deleteTargetFile, appendNewline, concatenationType, startingFile);
 		if (getLog().isDebugEnabled()) {
 			getLog().debug("Concatenating with params" + params.toString());
 		}
