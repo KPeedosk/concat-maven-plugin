@@ -214,7 +214,7 @@
 										<excludedClasse>*ConcatParams*</excludedClasse>
 									</excludedClasses>
 									<threads>4</threads>
-									<coverageThreshold>90</coverageThreshold>
+									<coverageThreshold>89</coverageThreshold>
 									<mutationThreshold>93</mutationThreshold>
 								</configuration>
 							</execution>
