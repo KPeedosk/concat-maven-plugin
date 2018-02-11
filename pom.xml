@@ -211,15 +211,11 @@
 								<configuration>
 									<excludedClasses>
 										<excludedClasse>*HelpMojo*</excludedClasse>
+										<excludedClasse>*ConcatParams*</excludedClasse>
 									</excludedClasses>
-									<excludedMethods>
-										<excludedMethod>toString</excludedMethod>
-										<excludedMethod>equals</excludedMethod>
-										<excludedMethod>hashCode</excludedMethod>
-									</excludedMethods>
 									<threads>4</threads>
-									<coverageThreshold>66</coverageThreshold>
-									<mutationThreshold>88</mutationThreshold>
+									<coverageThreshold>90</coverageThreshold>
+									<mutationThreshold>93</mutationThreshold>
 								</configuration>
 							</execution>
 						</executions>
