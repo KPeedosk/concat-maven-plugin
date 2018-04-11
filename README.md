@@ -93,6 +93,7 @@ Will concat all files in the directory to the output file.
   * When using `ConcatenationType.DIRECTORY` specify the directory from which to get all files. Natural ordering of the file name is used to sort the files.
 * `startingFile`
   * When using directory this file will be used as the starting file for concatenation.
+  * This file is _always_ appended first regardless of the ordering applied.
 
 ## Change Log ##
 
@@ -130,3 +131,7 @@ Will concat all files in the directory to the output file.
 
 * Add `startingFile` param used in `DIRECTORY` concatenation.
   * If specified this file will be the first file to be concatenated to with the rest following with natural ordering.
+
+### 1.3.1 ###
+
+Correct `startingFile` for a `startingFile` that is contained within the same directory.
