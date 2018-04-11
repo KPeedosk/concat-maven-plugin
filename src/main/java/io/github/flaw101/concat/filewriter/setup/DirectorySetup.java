@@ -24,6 +24,7 @@
 package io.github.flaw101.concat.filewriter.setup;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -45,17 +46,22 @@ public class DirectorySetup implements OutputSetup {
 	@Override
 	public void setup(final ConcatParams params) {
 		final File directory = new File(params.getDirectory());
-		if (params.getStartingFile() != null) {
-			params.add(params.getStartingFile());
-		}
-		final List<File> listFiles = (List<File>) FileUtils.listFiles(directory,
-				FileFilterUtils.fileFileFilter(), null);
+
+		final List<File> listFiles = new ArrayList<File>();
+		listFiles.addAll(
+				FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
 		Collections.sort(listFiles, new Comparator<File>() {
 			@Override
 			public int compare(final File o1, final File o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
 		});
+		if (params.getStartingFile() != null) {
+			// lol - hack it.
+			listFiles.remove(params.getStartingFile());
+			listFiles.add(0, params.getStartingFile());
+		}
+
 		params.addAll(listFiles);
 	}
 

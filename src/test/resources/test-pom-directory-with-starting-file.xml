@@ -28,7 +28,7 @@
 					<concatenationType>
 						DIRECTORY
 					</concatenationType>
-					<startingFile>src/test/resources/startingFile</startingFile>
+					<startingFile>src/test/resources/testfiles/startingFile</startingFile>
 				</configuration>
 			</plugin>
 		</plugins>
