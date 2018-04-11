@@ -134,4 +134,4 @@ Will concat all files in the directory to the output file.
 
 ### 1.3.1 ###
 
-Correct `startingFile` for a `startingFile` that is contained within the same directory.
+* Correct `startingFile` for a `startingFile` that is contained within the same directory.
