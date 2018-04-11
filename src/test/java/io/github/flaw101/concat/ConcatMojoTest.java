@@ -61,7 +61,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	@Test
 	public void testConcat_Directory() throws Exception {
 		execute("src/test/resources/test-pom-directory.xml", "concat",
-				"target/concatfile.output", "file1file2file3");
+				"target/concatfile.output", "file1file2file3start");
 	}
 
 	@Test
