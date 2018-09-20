@@ -264,7 +264,7 @@
                         <version>2.7.1</version>
                         <executions>
                             <execution>
-                                <phase>verify</phase>
+                                <phase>validate</phase>
                                 <goals>
                                     <goal>format</goal>
                                 </goals>
