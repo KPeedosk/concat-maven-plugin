@@ -28,7 +28,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import io.github.flaw101.concat.service.ConcantenationType;
+import io.github.flaw101.concat.service.ConcatenationType;
 
 /**
  * Paramerters required for building the output file and validation.
@@ -44,12 +44,12 @@ public class ConcatParams {
 	private final boolean deleteTargetFile;
 	private final boolean appendNewline;
 	private final Collection<File> files = new LinkedList<File>();
-	private final ConcantenationType concatenationType;
+	private final ConcatenationType concatenationType;
 	private final File startingFile;
 
 	public ConcatParams(String directory, Collection<File> files, File outputFile,
-			boolean deleteTargetFile, boolean appendNewline,
-			ConcantenationType concatenationType, File startingFile) {
+						boolean deleteTargetFile, boolean appendNewline,
+						ConcatenationType concatenationType, File startingFile) {
 		this.directory = directory;
 		if (files != null) {
 			this.files.addAll(files);
@@ -73,7 +73,7 @@ public class ConcatParams {
 		return deleteTargetFile;
 	}
 
-	public ConcantenationType getConcatenationType() {
+	public ConcatenationType getConcatenationType() {
 		return concatenationType;
 	}
 
@@ -82,6 +82,7 @@ public class ConcatParams {
 	}
 
 	public void addAll(final Collection<File> files) {
+		this.files.clear();
 		this.files.addAll(files);
 	}
 

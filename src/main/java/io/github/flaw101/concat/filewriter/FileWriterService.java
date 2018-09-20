@@ -27,6 +27,8 @@ import com.google.inject.Inject;
 
 import io.github.flaw101.concat.ConcatParams;
 import io.github.flaw101.concat.filewriter.setup.OutputSetup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Writes out to the Output file. Default is to just write the
@@ -58,14 +60,14 @@ public class FileWriterService {
 	public void writeToOutputfile(final ConcatParams concatParams) {
 		switch (concatParams.getConcatenationType()) {
 		case DIRECTORY:
-			directorySetup.setup(concatParams);
+			directorySetup.setup(concatParams);;
 			defaultWriter.write(concatParams);
 			break;
 		case FILE_LIST:
 			defaultWriter.write(concatParams);
 			break;
 		default:
-			throw new IllegalArgumentException("Concantenation Type not implemented");
+			throw new IllegalArgumentException("Concatenation Type not implemented");
 		}
 	}
 

@@ -55,11 +55,11 @@ public class FileListValidator implements Validator {
 		}
 		else if (StringUtils.isNotEmpty(concatParams.getDirectory())) {
 			throw new ValidationFailedException(
-					"Directory param is set, when File List conccat type is set. These are mutually exclusive");
+					"Directory param is set, when File List concat type is set. These are mutually exclusive");
 		}
 		else if (concatParams.getStartingFile() != null) {
 			throw new ValidationFailedException(
-					"Starting file is set. This is not used/required for this type of concatentation");
+					"Starting file is set. This is not used/required for this type of concatenation");
 		}
 
 		for (final File file : concatParams.getFiles()) {

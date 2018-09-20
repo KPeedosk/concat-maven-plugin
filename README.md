@@ -135,3 +135,8 @@ Will concat all files in the directory to the output file.
 ### 1.3.1 ###
 
 * Correct `startingFile` for a `startingFile` that is contained within the same directory.
+
+### 1.4.0 ###
+
+* Add SLF4J Simple Logger.
+  * Info, debug, and error logs are implemented for the flow of the plugin
