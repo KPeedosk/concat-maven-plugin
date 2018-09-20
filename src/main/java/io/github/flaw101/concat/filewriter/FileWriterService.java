@@ -60,7 +60,8 @@ public class FileWriterService {
 	public void writeToOutputfile(final ConcatParams concatParams) {
 		switch (concatParams.getConcatenationType()) {
 		case DIRECTORY:
-			directorySetup.setup(concatParams);;
+			directorySetup.setup(concatParams);
+			;
 			defaultWriter.write(concatParams);
 			break;
 		case FILE_LIST:

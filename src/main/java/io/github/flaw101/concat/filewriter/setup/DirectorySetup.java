@@ -42,47 +42,48 @@ import org.slf4j.LoggerFactory;
  */
 public class DirectorySetup implements OutputSetup {
 
-    private static final Logger logger = LoggerFactory.getLogger(DirectorySetup.class);
+	private static final Logger logger = LoggerFactory.getLogger(DirectorySetup.class);
 
-    @Override
-    public void setup(final ConcatParams params) {
+	@Override
+	public void setup(final ConcatParams params) {
 
-        logger.info("Setting Up Directory Concatenation.");
+		logger.info("Setting Up Directory Concatenation.");
 
-        final File directory = new File(params.getDirectory());
+		final File directory = new File(params.getDirectory());
 
-        final List<File> listFiles = new ArrayList<File>();
-        listFiles.addAll(
-                FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
+		final List<File> listFiles = new ArrayList<File>();
+		listFiles.addAll(
+				FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
 
-        Collections.sort(listFiles, new Comparator<File>() {
-            @Override
-            public int compare(final File o1, final File o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+		Collections.sort(listFiles, new Comparator<File>() {
+			@Override
+			public int compare(final File o1, final File o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
 
+		logger.info("Found Files - {} to contact", listFiles);
 
-        logger.info("Found Files - {} to contact", listFiles);
+		if (params.getStartingFile() != null) {
+			Iterator<File> fileIterator = listFiles.iterator();
+			File file;
+			logger.debug("Starting File not null. Placing - {} at start of list",
+					params.getStartingFile());
+			while (fileIterator.hasNext()) {
+				file = fileIterator.next();
+				if (file.getAbsolutePath()
+						.equals(params.getStartingFile().getAbsolutePath())) {
+					logger.debug("Removing file to file place at start of list - {}",
+							file);
+					fileIterator.remove();
+				}
+			}
+			listFiles.add(0, params.getStartingFile());
+		}
 
-        if (params.getStartingFile() != null) {
-            Iterator<File> fileIterator = listFiles.iterator();
-            File file;
-            logger.debug("Starting File not null. Placing - {} at start of list", params.getStartingFile());
-            while (fileIterator.hasNext()) {
-                file = fileIterator.next();
-                if (file.getAbsolutePath().equals(params.getStartingFile().getAbsolutePath())) {
-                    logger.debug("Removing file to file place at start of list - {}", file);
-                    fileIterator.remove();
-                }
-            }
-            listFiles.add(0, params.getStartingFile());
-        }
+		logger.info("Using files to contact - {}", listFiles);
 
-
-        logger.info("Using files to contact - {}", listFiles);
-
-        params.addAll(listFiles);
-    }
+		params.addAll(listFiles);
+	}
 
 }

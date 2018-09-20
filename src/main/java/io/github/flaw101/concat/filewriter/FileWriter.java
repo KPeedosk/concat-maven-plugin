@@ -41,35 +41,37 @@ import java.nio.charset.Charset;
  */
 public class FileWriter {
 
-    private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
+	private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
 
-    private static final Logger logger = LoggerFactory.getLogger(FileWriter.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileWriter.class);
 
-    public void write(final ConcatParams params) {
-        logger.info("Starting write to output file - {}", params.getOutputFile());
-        final File outputFile = params.getOutputFile();
-        if (params.isDeleteTargetFile()) {
-            logger.info("Delete target file is enabled. Deleting Target file - {}", params.getOutputFile());
-            FileUtils.deleteQuietly(params.getOutputFile());
-        }
-        try {
-            for (final File inputFile : params.getFiles()) {
-                logger.info("Writing {} to output file.", inputFile);
-                final String input = FileUtils.readFileToString(inputFile, CHARSET_UTF_8);
-                FileUtils.writeStringToFile(params.getOutputFile(), input, CHARSET_UTF_8,
-                        true);
-                if (params.isAppendNewline()) {
-                    logger.info("Appending new line");
-                    String property = System.getProperty("line.separator");
-                    String lineCharacter = property == null ? StringUtils.CR : property;
-                    logger.debug("Using new line character - {}", lineCharacter);
-                    FileUtils.writeStringToFile(outputFile,
-                            lineCharacter, CHARSET_UTF_8, true);
+	public void write(final ConcatParams params) {
+		logger.info("Starting write to output file - {}", params.getOutputFile());
+		final File outputFile = params.getOutputFile();
+		if (params.isDeleteTargetFile()) {
+			logger.info("Delete target file is enabled. Deleting Target file - {}",
+					params.getOutputFile());
+			FileUtils.deleteQuietly(params.getOutputFile());
+		}
+		try {
+			for (final File inputFile : params.getFiles()) {
+				logger.info("Writing {} to output file.", inputFile);
+				final String input = FileUtils.readFileToString(inputFile, CHARSET_UTF_8);
+				FileUtils.writeStringToFile(params.getOutputFile(), input, CHARSET_UTF_8,
+						true);
+				if (params.isAppendNewline()) {
+					logger.info("Appending new line");
+					String property = System.getProperty("line.separator");
+					String lineCharacter = property == null ? StringUtils.CR : property;
+					logger.debug("Using new line character - {}", lineCharacter);
+					FileUtils.writeStringToFile(outputFile, lineCharacter, CHARSET_UTF_8,
+							true);
 
-                }
-            }
-        } catch (final IOException e) {
-            throw new CannotWriteToOutputFileException(e);
-        }
-    }
+				}
+			}
+		}
+		catch (final IOException e) {
+			throw new CannotWriteToOutputFileException(e);
+		}
+	}
 }

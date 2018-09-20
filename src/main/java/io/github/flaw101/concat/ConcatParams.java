@@ -48,8 +48,8 @@ public class ConcatParams {
 	private final File startingFile;
 
 	public ConcatParams(String directory, Collection<File> files, File outputFile,
-						boolean deleteTargetFile, boolean appendNewline,
-						ConcatenationType concatenationType, File startingFile) {
+			boolean deleteTargetFile, boolean appendNewline,
+			ConcatenationType concatenationType, File startingFile) {
 		this.directory = directory;
 		if (files != null) {
 			this.files.addAll(files);
