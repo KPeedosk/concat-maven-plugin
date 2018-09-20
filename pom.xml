@@ -249,6 +249,9 @@
                         </executions>
                         <configuration>
                             <configFile>/.formatter.xml</configFile>
+                            <excludes>
+                                <exclude>**ConcatMojo.java</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -272,6 +275,9 @@
                         </executions>
                         <configuration>
                             <configFile>/.formatter.xml</configFile>
+                            <excludes>
+                                <exclude>**ConcatMojo.java</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
