@@ -23,51 +23,49 @@
  */
 package io.github.flaw101.concat.filewriter.setup;
 
-import java.io.File;
-import java.util.*;
-
+import io.github.flaw101.concat.ConcatParams;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
-
-import io.github.flaw101.concat.ConcatParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
- * Sets up the params for Directory concatenation.
+ * Setup File output in line with a basic Semantic Versioning strategy by splitting on file names on the
+ * first 3 or 4 <code>.</code> if they are integers and ordering those files with anything after the split natural
  *
  * @author Darren Forsythe
- * @since 1.1.0
+ * @since 1.5.0
  */
-public class DirectorySetup implements OutputSetup {
+public class SemanticVersioningSetup implements OutputSetup {
 
-	private static final Logger logger = LoggerFactory.getLogger(DirectorySetup.class);
+    private static final Logger logger = LoggerFactory.getLogger(SemanticVersioningSetup.class);
 
-	@Override
-	public void setup(final ConcatParams params) {
 
-		logger.info("Setting Up Directory Concatenation.");
+    @Override
+    public void setup(ConcatParams params) {
+        logger.info("Setting up Semantic Versioning Params");
 
-		final File directory = new File(params.getDirectory());
 
-		final List<File> listFiles = new ArrayList<File>();
-		listFiles.addAll(
-				FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
+        final File directory = new File(params.getDirectory());
 
-		Collections.sort(listFiles, new Comparator<File>() {
-			@Override
-			public int compare(final File o1, final File o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
+        final List<File> listFiles = new ArrayList<File>();
+        listFiles.addAll(
+                FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
 
-		logger.info("Found Files - {} to contact", listFiles);
+        Collections.sort(listFiles, new SemanticVersioningCompator());
+
+        logger.info("Found Files - {} to contact", listFiles);
 
         StartingFileHandler.setStartingFileToStartOfFiles(params, listFiles, logger);
 
         logger.info("Using files to contact - {}", listFiles);
 
-		params.addAll(listFiles);
-	}
+        params.addAll(listFiles);
+    }
 
 }
