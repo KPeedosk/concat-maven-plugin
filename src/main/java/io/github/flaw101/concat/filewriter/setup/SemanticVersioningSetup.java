@@ -29,6 +29,7 @@ import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +45,13 @@ import java.util.List;
 public class SemanticVersioningSetup implements OutputSetup {
 
     private static final Logger logger = LoggerFactory.getLogger(SemanticVersioningSetup.class);
+
+    private final StartingFileHandler startingFileHandler;
+
+    @Inject
+    public SemanticVersioningSetup(StartingFileHandler startingFileHandler) {
+        this.startingFileHandler = startingFileHandler;
+    }
 
 
     @Override
@@ -61,7 +69,7 @@ public class SemanticVersioningSetup implements OutputSetup {
 
         logger.info("Found Files - {} to contact", listFiles);
 
-        StartingFileHandler.setStartingFileToStartOfFiles(params, listFiles, logger);
+        startingFileHandler.setStartingFileToStartOfFiles(params, listFiles, logger);
 
         logger.info("Using files to contact - {}", listFiles);
 
