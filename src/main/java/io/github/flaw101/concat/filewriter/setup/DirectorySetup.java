@@ -73,7 +73,7 @@ public class DirectorySetup implements OutputSetup {
 
         logger.info("Found Files - {} to contact", listFiles);
 
-        startingFileHandler.setStartingFileToStartOfFiles(params, listFiles, logger);
+        startingFileHandler.setStartingFileToStartOfFiles(params, listFiles);
 
         logger.info("Using files to contact - {}", listFiles);
 
