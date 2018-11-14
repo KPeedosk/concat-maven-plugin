@@ -9,8 +9,7 @@ import java.util.List;
 
 public class StartingFileHandler {
 
-    //TODO Refactor
-    public static void setStartingFileToStartOfFiles(ConcatParams params, List<File> listFiles, Logger logger) {
+    public void setStartingFileToStartOfFiles(ConcatParams params, List<File> listFiles, Logger logger) {
         if (params.getStartingFile() != null) {
             Iterator<File> fileIterator = listFiles.iterator();
             File file;

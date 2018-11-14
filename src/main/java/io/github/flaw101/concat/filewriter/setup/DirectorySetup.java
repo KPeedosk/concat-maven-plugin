@@ -23,15 +23,18 @@
  */
 package io.github.flaw101.concat.filewriter.setup;
 
-import java.io.File;
-import java.util.*;
-
+import io.github.flaw101.concat.ConcatParams;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
-
-import io.github.flaw101.concat.ConcatParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Sets up the params for Directory concatenation.
@@ -41,33 +44,40 @@ import org.slf4j.LoggerFactory;
  */
 public class DirectorySetup implements OutputSetup {
 
-	private static final Logger logger = LoggerFactory.getLogger(DirectorySetup.class);
+    private static final Logger logger = LoggerFactory.getLogger(DirectorySetup.class);
 
-	@Override
-	public void setup(final ConcatParams params) {
+    private final StartingFileHandler startingFileHandler;
 
-		logger.info("Setting Up Directory Concatenation.");
+    @Inject
+    public DirectorySetup(StartingFileHandler startingFileHandler) {
+        this.startingFileHandler = startingFileHandler;
+    }
 
-		final File directory = new File(params.getDirectory());
+    @Override
+    public void setup(final ConcatParams params) {
 
-		final List<File> listFiles = new ArrayList<File>();
-		listFiles.addAll(
-				FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
+        logger.info("Setting Up Directory Concatenation.");
 
-		Collections.sort(listFiles, new Comparator<File>() {
-			@Override
-			public int compare(final File o1, final File o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
+        final File directory = new File(params.getDirectory());
 
-		logger.info("Found Files - {} to contact", listFiles);
+        final List<File> listFiles = new ArrayList<File>();
+        listFiles.addAll(
+                FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
 
-        StartingFileHandler.setStartingFileToStartOfFiles(params, listFiles, logger);
+        Collections.sort(listFiles, new Comparator<File>() {
+            @Override
+            public int compare(final File o1, final File o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        logger.info("Found Files - {} to contact", listFiles);
+
+        startingFileHandler.setStartingFileToStartOfFiles(params, listFiles, logger);
 
         logger.info("Using files to contact - {}", listFiles);
 
-		params.addAll(listFiles);
-	}
+        params.addAll(listFiles);
+    }
 
 }

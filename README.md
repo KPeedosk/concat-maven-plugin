@@ -34,7 +34,8 @@ Multiple methods of concatenating can be supported, the current implementions ar
   * Default setting, expects a list of `concatFiles`.
 * `DIRECTORY`
   * Given a specified `directory` all files will be concatenated to the output ordered by file name.
-
+* `SEMVER`
+  * Attempts to order a directory by [SEMVER](https://semver.org/) ordering.
 ### Param Validation ###
 
 Validations are in place to check only the specified parameters required by the Concatentation Type, and are usable.
@@ -140,3 +141,8 @@ Will concat all files in the directory to the output file.
 
 * Add SLF4J Simple Logger.
   * Info, debug, and error logs are implemented for the flow of the plugin
+
+### 1.5.0 ###
+
+* Add SEMVER conact type. 
+   * Follows directory for the most part except file comparison attempts [SEMVER](https://semver.org/) ordering.
