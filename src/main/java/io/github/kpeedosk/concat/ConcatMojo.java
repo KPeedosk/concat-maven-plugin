@@ -1,18 +1,21 @@
 /**
  * MIT License
- * <p>
- * Copyright (c) 2018 Darren Forsythe
- * <p>
+ * 
+ * Copyright for portions of project concat-maven-plugin are held by Darren Forsythe, 2018 as part of project Bar. All other copyright for project Foo are held
+ * by Karl Peedosk, 2019.
+ * 
+ * Copyright (c) 2019 Karl Peedosk
+ * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ * 
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,32 +24,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat;
+package io.github.kpeedosk.concat;
 
 import java.io.File;
 import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import io.github.flaw101.concat.service.ConcatenationType;
-import io.github.flaw101.concat.service.ConcatService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.github.kpeedosk.concat.service.ConcatService;
+import io.github.kpeedosk.concat.service.ConcatenationType;
 
 /**
  * Goal which concatenates several files and creates a new file as specified.
  *
- * @author Darren Forsythe
- * @version 1.0.0
- * @Mojo( name = "concat" )
+ * @author Karl Peedosk
+ * @version 1.1.0
+ *          @Mojo( name = "concat" )
  * @goal concat
- * @Mojo( defaultPhase = "process-sources" )
+ *       @Mojo( defaultPhase = "process-sources" )
  * @phase process-sources
- * @since 1.0.0
+ * @since 1.1.0
  */
 public class ConcatMojo extends AbstractMojo {
 
@@ -84,6 +87,13 @@ public class ConcatMojo extends AbstractMojo {
     private String directory;
 
     /**
+     * Scan directory recursively.
+     *
+     * @parameter default-value="false"
+     */
+    private boolean recursive;
+
+    /**
      * Append newline after each concatenation
      *
      * @parameter default-value="false"
@@ -107,13 +117,12 @@ public class ConcatMojo extends AbstractMojo {
 
     /*
      * (non-Javadoc)
-     *
      * @see org.apache.maven.plugin.AbstractMojo#execute()
      */
     @Override
     public void execute() throws MojoExecutionException {
-        final ConcatParams params = new ConcatParams(directory, concatFiles, outputFile,
-                deleteTargetFile, appendNewline, concatenationType, startingFile);
+        final ConcatParams params =
+                new ConcatParams(directory, concatFiles, outputFile, deleteTargetFile, appendNewline, recursive, concatenationType, startingFile);
         logger.info("Starting Concatenation");
         logger.debug("Concatenating with params - {}", params);
 

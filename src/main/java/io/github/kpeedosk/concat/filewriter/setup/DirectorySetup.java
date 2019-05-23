@@ -21,51 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.filewriter.setup;
+package io.github.kpeedosk.concat.filewriter.setup;
 
-import io.github.flaw101.concat.ConcatParams;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-/**
- * Setup File output in line with a basic Semantic Versioning strategy by splitting on file names on the
- * first 3 or 4 <code>.</code> if they are integers and ordering those files with anything after the split natural
- *
- * @author Darren Forsythe
- * @since 1.5.0
- */
-public class SemanticVersioningSetup implements OutputSetup {
+import javax.inject.Inject;
 
-    private static final Logger logger = LoggerFactory.getLogger(SemanticVersioningSetup.class);
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import io.github.kpeedosk.concat.ConcatParams;
+
+/**
+ * Sets up the params for Directory concatenation.
+ *
+ * @author Karl Peedosk
+ * @since 1.2.0
+ */
+public class DirectorySetup implements OutputSetup {
+
+    private static final Logger logger = LoggerFactory.getLogger(DirectorySetup.class);
 
     private final StartingFileHandler startingFileHandler;
 
     @Inject
-    public SemanticVersioningSetup(StartingFileHandler startingFileHandler) {
+    public DirectorySetup(StartingFileHandler startingFileHandler) {
         this.startingFileHandler = startingFileHandler;
     }
 
-
     @Override
-    public void setup(ConcatParams params) {
-        logger.info("Setting up Semantic Versioning Params");
+    public void setup(final ConcatParams params) {
 
+        logger.info("Setting Up Directory Concatenation.");
 
         final File directory = new File(params.getDirectory());
 
         final List<File> listFiles = new ArrayList<File>();
-        listFiles.addAll(
-                FileUtils.listFiles(directory, FileFilterUtils.fileFileFilter(), null));
+        IOFileFilter filter = FileFilterUtils.fileFileFilter();
+        listFiles.addAll(FileUtils.listFiles(directory, filter, params.isRecursive() ? filter : null));
 
-        Collections.sort(listFiles, new SemanticVersioningCompator());
+        Collections.sort(listFiles, new Comparator<File>() {
+            @Override
+            public int compare(final File o1, final File o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
 
         logger.info("Found Files - {} to contact", listFiles);
 

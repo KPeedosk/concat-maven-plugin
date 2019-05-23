@@ -21,19 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.validate;
+package io.github.kpeedosk.concat.filewriter.setup;
 
-import io.github.flaw101.concat.ConcatParams;
+import io.github.kpeedosk.concat.ConcatParams;
 
 /**
- * Defines a validator to check parameters required for the Execution that was set.
+ * Sets up the {@link ConcatParams#getFiles()} for non-default concatenation Types
  *
- * @since 1.1.0
  * @author Darren Forsythe
+ * @since 1.1.0
  *
  */
-public interface Validator {
+public interface OutputSetup {
 
-	void validate(ConcatParams concatParams) throws ValidationFailedException;
+	void setup(ConcatParams params);
 
 }

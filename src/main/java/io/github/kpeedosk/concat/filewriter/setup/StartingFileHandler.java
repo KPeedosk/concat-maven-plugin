@@ -1,8 +1,9 @@
-package io.github.flaw101.concat.filewriter.setup;
+package io.github.kpeedosk.concat.filewriter.setup;
 
-import io.github.flaw101.concat.ConcatParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.github.kpeedosk.concat.ConcatParams;
 
 import java.io.File;
 import java.util.Iterator;

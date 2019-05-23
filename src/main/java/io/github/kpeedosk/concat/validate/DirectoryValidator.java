@@ -1,18 +1,14 @@
 /**
  * MIT License
- * <p>
  * Copyright (c) 2018 Darren Forsythe
- * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,33 +17,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat;
+package io.github.kpeedosk.concat.validate;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.name.Names;
-import io.github.flaw101.concat.filewriter.setup.DirectorySetup;
-import io.github.flaw101.concat.filewriter.setup.OutputSetup;
-import io.github.flaw101.concat.filewriter.setup.SemanticVersioningSetup;
-import io.github.flaw101.concat.validate.DirectoryValidator;
-import io.github.flaw101.concat.validate.FileListValidator;
-import io.github.flaw101.concat.validate.Validator;
+import java.io.File;
+
+import org.codehaus.plexus.util.StringUtils;
+
+import io.github.kpeedosk.concat.ConcatParams;
 
 /**
- * Guice Module to setup non-concrete classes.
+ * Validates required params for File List Type.
  *
  * @author Darren Forsythe
- * @since 1.1.2
+ * @since 1.1.0
  */
-public class ConcatModule extends AbstractModule {
+public class DirectoryValidator implements Validator {
 
+    /*
+     * (non-Javadoc)
+     * @see io.github.kpeedosk.concat.validate.Validator#validate(io.github.kpeedosk.concat
+     * .ConcatParams)
+     */
     @Override
-    protected void configure() {
-        bind(Validator.class).annotatedWith(Names.named("FileList"))
-                .to(FileListValidator.class);
-        bind(Validator.class).annotatedWith(Names.named("Directory"))
-                .to(DirectoryValidator.class);
-        bind(OutputSetup.class).annotatedWith(Names.named("DirectorySetup")).to(DirectorySetup.class);
-        bind(OutputSetup.class).annotatedWith(Names.named("SemVerSetup")).to(SemanticVersioningSetup.class);
+    public void validate(final ConcatParams concatParams) throws ValidationFailedException {
+        if (concatParams.getOutputFile() == null) {
+            throw new ValidationFailedException("Please specify a correct output file");
+        } else if (!concatParams.getFiles().isEmpty()) {
+            throw new ValidationFailedException("Files were provided to concatenate, but Directory concatenation type is set.");
+        } else if (StringUtils.isEmpty(concatParams.getDirectory())) {
+            throw new ValidationFailedException("No Directory set to concatenate files");
+        } else if (!new File(concatParams.getDirectory()).isDirectory()) {
+            throw new ValidationFailedException("Directory is not a directory! Check path.");
+        }
     }
-
 }

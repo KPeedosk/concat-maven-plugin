@@ -21,12 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.filewriter;
+package io.github.kpeedosk.concat.filewriter;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import io.github.flaw101.concat.ConcatParams;
-import io.github.flaw101.concat.filewriter.setup.OutputSetup;
+
+import io.github.kpeedosk.concat.ConcatParams;
+import io.github.kpeedosk.concat.filewriter.setup.OutputSetup;
 
 /**
  * Writes out to the Output file. Default is to just write the

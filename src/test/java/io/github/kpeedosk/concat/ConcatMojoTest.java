@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat;
+package io.github.kpeedosk.concat;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -30,6 +30,8 @@ import org.codehaus.plexus.util.ExceptionUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import io.github.kpeedosk.concat.ConcatMojo;
 
 import java.io.File;
 import java.nio.charset.Charset;

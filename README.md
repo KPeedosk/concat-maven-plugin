@@ -2,13 +2,13 @@
 
 Maven Plugin to allow concatenation of files.
 
-Forked from [Bomas Contcat Maven Plugin](https://github.com/bomas/concat-maven-plugin "https://github.com/bomas/concat-maven-plugin").
+Forked from [DarrenForsythe concat-maven-plugin](https://github.com/DarrenForsythe/concat-maven-plugin "https://github.com/DarrenForsythe/concat-maven-plugin").
 
 This plugin is compiled against maven `3.2.5`, the last supported java 1.6 maven release, hosted on Maven Central.
 
 ```xml
 <plugin>
-    <groupId>io.github.flaw101</groupId>
+    <groupId>io.github.KPeedosk</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <version><!-- A Version --> </version>
     <configuration>
@@ -19,8 +19,8 @@ This plugin is compiled against maven `3.2.5`, the last supported java 1.6 maven
 
 ## Build Info ##
 
-[![Build Status](https://travis-ci.org/Flaw101/concat-maven-plugin.svg?branch=master)](https://travis-ci.org/Flaw101/concat-maven-plugin)
-[![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/io/github/flaw101/concat-maven-plugin/maven-metadata.xml.svg)](http://repo1.maven.org/maven2/io/github/flaw101/concat-maven-plugin/)
+[![Build Status](https://travis-ci.org/kpeedosk/concat-maven-plugin.svg?branch=master)](https://travis-ci.org/kpeedosk/concat-maven-plugin)
+[![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/io/github/flaw101/concat-maven-plugin/maven-metadata.xml.svg)](http://repo1.maven.org/maven2/io/github/kpeedosk/concat-maven-plugin/)
 
 ### Build ###
 
@@ -50,7 +50,7 @@ A basic example, which will concat the `.input` files to the `concatfile.output`
 
 ```xml
 <plugin>
-    <groupId>io.github.flaw101</groupId>
+    <groupId>io.github.kpeedosk</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <configuration>
         <concatenationType>FILE_LIST</concatenationType>
@@ -70,7 +70,7 @@ Will concat all files in the directory to the output file.
 
 ```xml
 <plugin>
-    <groupId>io.github.flaw101</groupId>
+    <groupId>io.github.kpeedosk</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <configuration>
         <outputFile>target/concatfile.output</outputFile>
@@ -95,6 +95,8 @@ Will concat all files in the directory to the output file.
 * `startingFile`
   * When using directory this file will be used as the starting file for concatenation.
   * This file is _always_ appended first regardless of the ordering applied.
+* `recursive`
+  * Defaults to false, should directory be searched recursively.
 
 ## Change Log ##
 
@@ -146,3 +148,7 @@ Will concat all files in the directory to the output file.
 
 * Add SEMVER conact type. 
    * Follows directory for the most part except file comparison attempts [SEMVER](https://semver.org/) ordering.
+   
+### 1.6.0 ###
+
+* Add recurisve directory search. 

@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.flaw101</groupId>
+    <groupId>io.github.kpeedosk</groupId>
     <artifactId>concat-maven-plugin</artifactId>
-    <version>1.5.0</version>
+    <version>1.6.0</version>
     <packaging>maven-plugin</packaging>
     <name>Concat Maven Plugin</name>
     <description>Maven plugin that can concatenate several files into one new file.</description>
-    <url>https://github.com/flaw101/concat-maven-plugin</url>
+    <url>https://github.com/KPeedosk/concat-maven-plugin</url>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -18,17 +18,15 @@
     </licenses>
     <developers>
         <developer>
-            <id>Flawless101</id>
-            <name>Darren Forsythe</name>
-            <email>concat@darrenforsythe.com</email>
-            <timezone>0</timezone>
+            <id>KPeedosk</id>
+            <name>Karl Peedosk</name>
         </developer>
     </developers>
     <prerequisites>
         <maven>3.2.5</maven>
     </prerequisites>
     <scm>
-        <url>https://github.com/flawl101/concat-maven-plugin.git</url>
+        <url>https://github.com/KPeedosk/concat-maven-plugin.git</url>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.filewriter;
+package io.github.kpeedosk.concat.filewriter;
 
-import io.github.flaw101.concat.ConcatParams;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.github.kpeedosk.concat.ConcatParams;
 
 import java.io.File;
 import java.io.IOException;

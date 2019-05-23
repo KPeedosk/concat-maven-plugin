@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2018 Darren Forsythe
+Copyright for portions of project concat-maven-plugin are held by Darren Forsythe, 2018 as part of project Bar. All other copyright for project Foo are held by Karl Peedosk, 2019.
+
+Copyright (c) 2019 Karl Peedosk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

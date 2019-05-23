@@ -21,12 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.validate;
+package io.github.kpeedosk.concat.validate;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import io.github.flaw101.concat.ConcatParams;
-import io.github.flaw101.concat.service.ConcatenationType;
+
+import io.github.kpeedosk.concat.ConcatParams;
+import io.github.kpeedosk.concat.service.ConcatenationType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

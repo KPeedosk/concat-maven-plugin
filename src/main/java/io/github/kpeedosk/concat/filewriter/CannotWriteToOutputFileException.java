@@ -21,36 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.service;
-
-import com.google.inject.Inject;
-
-import io.github.flaw101.concat.ConcatParams;
-import io.github.flaw101.concat.filewriter.FileWriterService;
-import io.github.flaw101.concat.validate.ValidationFailedException;
-import io.github.flaw101.concat.validate.ValidatorService;
+package io.github.kpeedosk.concat.filewriter;
 
 /**
- * Main service to handle the concat.
+ * If there is any failure writing to the output.
  *
  * @author Darren Forsythe
- * @since 1.1.2
+ * @since 1.1.0
  *
  */
-public class ConcatService {
+public class CannotWriteToOutputFileException extends RuntimeException {
 
-	private final ValidatorService validatorService;
-	private final FileWriterService fileWriterService;
+	private static final long serialVersionUID = 75580154302458082L;
 
-	@Inject
-	public ConcatService(final ValidatorService validatorService,
-			final FileWriterService fileWriterService) {
-		this.validatorService = validatorService;
-		this.fileWriterService = fileWriterService;
-	}
-
-	public void concat(final ConcatParams params) throws ValidationFailedException {
-		validatorService.validate(params);
-		fileWriterService.writeToOutputfile(params);
+	public CannotWriteToOutputFileException(final Throwable throwable) {
+		super(throwable);
 	}
 }

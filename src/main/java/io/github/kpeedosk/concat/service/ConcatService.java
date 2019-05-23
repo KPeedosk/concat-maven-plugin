@@ -21,45 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.validate;
+package io.github.kpeedosk.concat.service;
 
-import java.io.File;
+import com.google.inject.Inject;
 
-import org.codehaus.plexus.util.StringUtils;
-
-import io.github.flaw101.concat.ConcatParams;
+import io.github.kpeedosk.concat.ConcatParams;
+import io.github.kpeedosk.concat.filewriter.FileWriterService;
+import io.github.kpeedosk.concat.validate.ValidationFailedException;
+import io.github.kpeedosk.concat.validate.ValidatorService;
 
 /**
- * Validates required params for File List Type.
+ * Main service to handle the concat.
  *
  * @author Darren Forsythe
- * @since 1.1.0
+ * @since 1.1.2
  *
  */
-public class DirectoryValidator implements Validator {
+public class ConcatService {
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see io.github.flaw101.concat.validate.Validator#validate(io.github.flaw101.concat
-	 * .ConcatParams)
-	 */
-	@Override
-	public void validate(final ConcatParams concatParams)
-			throws ValidationFailedException {
-		if (concatParams.getOutputFile() == null) {
-			throw new ValidationFailedException("Please specify a correct output file");
-		}
-		else if (!concatParams.getFiles().isEmpty()) {
-			throw new ValidationFailedException(
-					"Files were provided to concatenate, but Directory concatenation type is set.");
-		}
-		else if (StringUtils.isEmpty(concatParams.getDirectory())) {
-			throw new ValidationFailedException("No Directory set to concatenate files");
-		}
-		else if (!new File(concatParams.getDirectory()).isDirectory()) {
-			throw new ValidationFailedException(
-					"Directory is not a directory! Check path.");
-		}
+	private final ValidatorService validatorService;
+	private final FileWriterService fileWriterService;
+
+	@Inject
+	public ConcatService(final ValidatorService validatorService,
+			final FileWriterService fileWriterService) {
+		this.validatorService = validatorService;
+		this.fileWriterService = fileWriterService;
+	}
+
+	public void concat(final ConcatParams params) throws ValidationFailedException {
+		validatorService.validate(params);
+		fileWriterService.writeToOutputfile(params);
 	}
 }

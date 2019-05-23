@@ -21,20 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.flaw101.concat.filewriter;
+package io.github.kpeedosk.concat.validate;
+
+import io.github.kpeedosk.concat.ConcatParams;
 
 /**
- * If there is any failure writing to the output.
+ * Defines a validator to check parameters required for the Execution that was set.
  *
- * @author Darren Forsythe
  * @since 1.1.0
+ * @author Darren Forsythe
  *
  */
-public class CannotWriteToOutputFileException extends RuntimeException {
+public interface Validator {
 
-	private static final long serialVersionUID = 75580154302458082L;
+	void validate(ConcatParams concatParams) throws ValidationFailedException;
 
-	public CannotWriteToOutputFileException(final Throwable throwable) {
-		super(throwable);
-	}
 }

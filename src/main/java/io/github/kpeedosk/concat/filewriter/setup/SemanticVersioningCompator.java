@@ -1,4 +1,4 @@
-package io.github.flaw101.concat.filewriter.setup;
+package io.github.kpeedosk.concat.filewriter.setup;
 
 import java.io.File;
 import java.util.Comparator;
